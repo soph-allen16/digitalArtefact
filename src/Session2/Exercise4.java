@@ -1,3 +1,5 @@
+package Session2;
+
 import java.util.Scanner;
 
 public class Exercise4 {
