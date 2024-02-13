@@ -1,4 +1,4 @@
-package Session2;
+package digitalArtefact;
 
 import java.util.Scanner;
 
@@ -23,5 +23,28 @@ public class Exercise5GreetingPage {
         System.out.println("Ok, all information has been gathered.");
         System.out.println("Welcome to the program " + firstName + " " + surname + ". "
         + "Congratulations on working for " + workplace + " for " + yearsWorked + " years.") ;
+
+        System.out.println("""
+                You have 4 choices:
+                1: See your details
+                2: Hear some words of encouragement
+                3: Exit application
+                Please select (1-3)
+                """);
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if(choice ==1){
+            System.out.println("Your name is: " + firstName + " "+ surname+ ". You have worked for " + workplace + " for " + yearsWorked + " years.");
+        }else if( choice ==2 ){
+            System.out.println( firstName + ", you are doing really well.");
+        }else if( choice == 3){
+            System.out.println("Okay, exiting...");
+            System.exit(0);
+        }else{
+            System.out.println("incorrect input.");
+        }
+
+        scanner.close();
     }
 }
