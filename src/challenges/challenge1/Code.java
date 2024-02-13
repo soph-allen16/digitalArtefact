@@ -16,7 +16,7 @@ public class Code {
     private void getMessage(){
         System.out.println("What message would you like to decode?");
         String message = scanner.nextLine();
-        codedMessage = Arrays.stream(message.split(" ")).map(s -> Integer.parseInt(s)).toList();
+        codedMessage = Arrays.stream(message.split(",")).map(s -> Integer.parseInt(s.trim())).toList();
         menu();
     }
 
