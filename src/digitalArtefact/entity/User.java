@@ -3,14 +3,18 @@ package digitalArtefact.entity;
 import java.util.Scanner;
 
 public class User {
-    String firstname;
-    String surname;
-    String workplace;
-    String yearsWorked;
+    private final Scanner scanner;
+    private String firstname;
+    private String surname;
+    private String workplace;
+    private String yearsWorked;
 
-    public User(){
-        Scanner scanner = new Scanner(System.in);
+    public User(Scanner scanner){
+        this.scanner = scanner;
+        gatherInformation();
+    }
 
+    private void gatherInformation(){
         System.out.println("Hello and welcome to the application. Before we start, let's collect some information about you.");
 
         System.out.println("What is your first name?");
@@ -44,5 +48,9 @@ public class User {
 
     public String getYearsWorked() {
         return yearsWorked;
+    }
+
+    public String getUserSummary(){
+        return "Your name is: " + firstname + " " + surname + ". You have worked for " + workplace + " for " + yearsWorked + " years.";
     }
 }

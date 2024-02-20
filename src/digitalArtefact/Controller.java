@@ -6,14 +6,15 @@ import java.util.Scanner;
 
 public class Controller {
     private final User user;
+    private final Scanner scanner;
 
-    public Controller(User user) {
+    public Controller(User user, Scanner scanner) {
         this.user = user;
+        this.scanner = scanner;
         menu();
     }
 
     private void menu() {
-        Scanner menuScanner = new Scanner(System.in);
         boolean tryAgain = false;
 
         do {
@@ -26,12 +27,12 @@ public class Controller {
                     Please select (1-3)
                     """);
 
-            int choice;
-            choice = menuScanner.nextInt();
-            menuScanner.nextLine();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
             if (choice == 1) {
-                System.out.println("Your name is: " + user.getFirstname() + " " + user.getSurname() + ". You have worked for " + user.getWorkplace() + " for " + user.getYearsWorked() + " years.");
+                System.out.println(user.getUserSummary());
+                tryAgain = true;
             } else if (choice == 2) {
                 System.out.println(user.getFirstname() + ", you are doing really well.");
             } else if (choice == 3) {
