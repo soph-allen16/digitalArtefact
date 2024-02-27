@@ -1,14 +1,12 @@
-package digitalArtefact;
-
-import digitalArtefact.entity.User;
+package digitalArtefact.entity;
 
 import java.util.Scanner;
 
-public class Controller {
+public class ApplicationMenu {
     private final User user;
     private final Scanner scanner;
 
-    public Controller(User user, Scanner scanner) {
+    public ApplicationMenu(User user, Scanner scanner) {
         this.user = user;
         this.scanner = scanner;
         menu();
@@ -20,7 +18,7 @@ public class Controller {
         do {
             tryAgain = false;
             System.out.println("""
-                    You have 4 choices:g
+                    You have 4 choices:
                     1: See your details
                     2: Hear some words of encouragement
                     3: Exit application
