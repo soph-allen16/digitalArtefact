@@ -1,36 +1,32 @@
-package digitalArtefact.entity;
+package main.entity;
 
-import java.util.Scanner;
+import main.utils.InputHelper;
 
 public class User {
-    private final Scanner scanner;
+    private final InputHelper inputHelper;
     private String firstname;
     private String surname;
     private String workplace;
-    private String yearsWorked;
+    private int yearsWorked;
 
-    public User(Scanner scanner){
-        this.scanner = scanner;
+    public User(InputHelper inputHelper){
+        this.inputHelper = inputHelper;
         gatherInformation();
     }
 
     private void gatherInformation(){
         System.out.println("Hello and welcome to the application. Before we start, let's collect some information about you.");
 
-        System.out.println("What is your first name?");
-        this.firstname = scanner.nextLine();
+        this.firstname = inputHelper.getStringInput("What is your first name?");
 
-        System.out.println("What is your surname?");
-        this.surname = scanner.nextLine();
+        this.surname = inputHelper.getStringInput("What is your surname?");
 
-        System.out.println("Where do you work?");
-        this.workplace = scanner.nextLine();
+        this.workplace = inputHelper.getStringInput("Where do you work?");
 
-        System.out.println("How many years have you worked for " + workplace + "?");
-        this.yearsWorked = scanner.nextLine();
+        this.yearsWorked = inputHelper.getIntegerInput("How many years have you worked for " + workplace + "?");
 
-        System.out.println("Ok, all information has been gathered.");
-        System.out.println("Welcome to the program " + firstname + " " + surname + ". "
+        System.out.println();
+        System.out.println("Ok, all information has been gathered. \r\n" + "Welcome to the program " + firstname + " " + surname + ". "
                 + "Congratulations on working for " + workplace + " for " + yearsWorked + " years.") ;
     }
 
@@ -46,7 +42,7 @@ public class User {
         return workplace;
     }
 
-    public String getYearsWorked() {
+    public int getYearsWorked() {
         return yearsWorked;
     }
 
