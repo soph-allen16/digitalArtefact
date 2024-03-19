@@ -1,6 +1,6 @@
-package main.entity;
+package entity;
 
-import main.utils.InputHelper;
+import utils.InputHelper;
 
 public class User {
     private final InputHelper inputHelper;

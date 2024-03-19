@@ -1,7 +1,8 @@
-package main.repository;
+package repository;
 
-import main.entity.Ingredient;
-import main.utils.InputHelper;
+import entity.Ingredient;
+import utils.InputHelper;
+
 
 import java.util.ArrayList;
 import java.util.List;

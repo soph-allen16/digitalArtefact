@@ -1,7 +1,8 @@
-package main.entity;
+package entity;
 
-import main.repository.IngredientRepository;
-import main.utils.InputHelper;
+
+import repository.IngredientRepository;
+import utils.InputHelper;
 
 public class IngredientService {
     private final InputHelper inputHelper;

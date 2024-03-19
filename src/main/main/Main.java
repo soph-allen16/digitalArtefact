@@ -1,6 +1,5 @@
-package main;
-import main.entity.ApplicationMenu;
-import main.utils.InputHelper;
+import entity.ApplicationMenu;
+import utils.InputHelper;
 
 public class Main {
     public static void main(String[] args){
