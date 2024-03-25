@@ -1,5 +1,3 @@
-package test;
-
 import entity.Ingredient;
 import org.junit.Test;
 
@@ -36,7 +34,7 @@ public class IngredientTest{
         Ingredient ingredient = new Ingredient(name,type);
 
         Object object = new Object();
-        assertFalse(ingredient.equals(object));
+        Assert.assertFalse(ingredient.equals(object));
 
     }
 }

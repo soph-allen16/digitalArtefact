@@ -1,6 +1,3 @@
-package test;
-
-
 import org.junit.Test;
 
 import java.util.Scanner;
