@@ -1,14 +1,15 @@
-package entity;
+package view.service;
 
 
-import repository.IngredientRepository;
+import model.entity.Ingredient;
+import model.repository.IngredientRepository;
 import utils.InputHelper;
 
 public class IngredientService {
     private final InputHelper inputHelper;
     private final IngredientRepository ingredientRepository;
 
-    IngredientService(InputHelper inputHelper){
+    public IngredientService(InputHelper inputHelper){
         this.inputHelper = inputHelper;
         this.ingredientRepository = new IngredientRepository(this.inputHelper);
     }

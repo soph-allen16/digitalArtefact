@@ -1,6 +1,6 @@
-package repository;
+package model.repository;
 
-import entity.Ingredient;
+import model.entity.Ingredient;
 import utils.InputHelper;
 
 
