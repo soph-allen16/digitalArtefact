@@ -9,6 +9,8 @@ public class IngredientRepository {
     private final InputHelper inputHelper;
     private final List<Ingredient> ingredientList;
 
+    private int counter = 0;
+
     public IngredientRepository(InputHelper inputHelper){
         this.inputHelper = inputHelper;
         ingredientList = new ArrayList<Ingredient>();
@@ -19,17 +21,16 @@ public class IngredientRepository {
     }
 
     public void addIngredient(String ingredientName, String ingredientType){
-        Ingredient ingredient = new Ingredient( ingredientName, ingredientType,ingredientList.size()+1 );
+        Ingredient ingredient = new Ingredient( ingredientName, ingredientType, counter + 1);
         if( ingredientList.contains(ingredient) ){
             System.out.println("This ingredient is already in the list");
         }else{
             ingredientList.add(ingredient);
+            counter ++;
         }
     }
 
-    public void removeIngredient( String name ){
-        Ingredient ingredient = findIngredientByName( name );
-
+    public void removeIngredient( Ingredient ingredient ){
         if( ingredient == null ){
             System.out.println("The ingredient you entered does not exist.");
         }else{

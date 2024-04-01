@@ -24,11 +24,27 @@ public class IngredientService {
     public void addIngredient(){
         String name = inputHelper.getStringInput("Please enter the name of the ingredient");
         String type = inputHelper.getStringInput("please enter an ingredient type");
-        ingredientRepository.addIngredient(name,type);
+        ingredientRepository.addIngredient( name, type );
     }
 
     public void modifyIngredient(){
         int id = inputHelper.getIntegerInput("Enter the ID of the ingredient you would like to modify");
         ingredientRepository.modifyIngredientMenu( ingredientRepository.findIngredientById(id) );
+    }
+
+    public void deleteIngredient(){
+        int id = inputHelper.getIntegerInput("Enter the ID of the ingredient you would like to delete");
+        Ingredient ingredient = ingredientRepository.findIngredientById(id);
+
+        System.out.println("Delete " + ingredient.getIngredientName() + " ? Y/N ");
+        String input = inputHelper.getStringInput();
+
+        if( input.equalsIgnoreCase("y") ){
+            ingredientRepository.removeIngredient(ingredient);
+        }else if( input.equalsIgnoreCase("n")){
+            System.out.println( "Ingredient not deleted.");
+        }else{
+            System.out.println("Invalid input - please try again.");
+        }
     }
 }

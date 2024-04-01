@@ -23,7 +23,8 @@ public class EditIngredientMenu {
                     1: View ingredients list
                     2: Add ingredient
                     3: Edit ingredient
-                    4: Return
+                    4: Delete ingredient
+                    5: Return
                     Please select (1-4)
                     """);
 
@@ -33,9 +34,11 @@ public class EditIngredientMenu {
                 ingredientService.viewIngredientList();
             } else if (choice == 2) {
                 ingredientService.addIngredient();
-            }else if(choice ==3){
+            }else if(choice ==3) {
                 ingredientService.modifyIngredient();
-            }else if (choice ==4){
+            }else if ( choice == 4){
+                ingredientService.deleteIngredient();
+            }else if (choice == 5){
                 tryAgain = false;
             }else{
                 System.out.println("Incorrect input, please try again.");
