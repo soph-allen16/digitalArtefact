@@ -3,21 +3,22 @@ package view.menu;
 import utils.InputHelper;
 import view.service.IngredientService;
 
+// Main menu for the application, provides options for the user and forwards them to their desired functionality.
 public class MainMenu {
-    //private final User user;
-    private final InputHelper inputHelper;
 
+    private final InputHelper inputHelper;
     private final EditMenu editMenu;
     private final IngredientService ingredientService;
 
+    //Initialise dependencies and run the menu
     public MainMenu(InputHelper inputHelper, IngredientService ingredientService) {
         this.inputHelper = inputHelper;
-        //this.user = new User(inputHelper);
         this.ingredientService = ingredientService;
         this.editMenu = new EditMenu(inputHelper, ingredientService);
         runMenu();
     }
 
+    // Collects user input and directs them on. Menu finishes and application ends when the while loop is ended by setting the tryAgain variable to false.
     private void runMenu() {
         boolean tryAgain = true;
 
@@ -39,7 +40,6 @@ public class MainMenu {
                 ingredientService.viewIngredientList();
             } else if (choice == 3) {
                 tryAgain = false;
-                //System.exit(0);
             } else {
                 System.out.println("incorrect input. Please try again");
             }

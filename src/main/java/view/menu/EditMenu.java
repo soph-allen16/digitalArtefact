@@ -38,6 +38,8 @@ public class EditMenu {
 
             }if(choice == 3){
                 tryAgain = false;
+            }else{
+                System.out.println("Incorrect input. Please try again.");
             }
 
         }while(tryAgain);

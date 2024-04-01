@@ -15,7 +15,7 @@ public class IngredientService {
     }
 
     public void viewIngredientList(){
-        System.out.println("ID | Name | Type");
+        System.out.println("\r\n ID | Name | Type");
         for(Ingredient i : ingredientRepository.getAllIngredients()){
             System.out.println(i.getIngredientId() + "   " + i.getIngredientName() + "   " + i.getIngredientType());
         }

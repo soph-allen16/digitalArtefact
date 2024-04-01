@@ -65,7 +65,7 @@ public class IngredientRepository {
             while(tryAgain) {
                 Ingredient newIngredient = ingredient ;
 
-                System.out.println("Ingredient: " + ingredient.getIngredientName() + " Type: " + ingredient.getIngredientType());
+                System.out.println(  "\r\n Ingredient: " + ingredient.getIngredientName() + " Type: " + ingredient.getIngredientType());
                 System.out.println("""
                         \r\n
                         1: Modify name
