@@ -1,22 +1,28 @@
-package view;
+package view.menu;
 
-import model.repository.IngredientRepository;
 import utils.InputHelper;
+import view.service.IngredientService;
 
-public class ViewEditMenu {
+public class EditMenu {
     private final InputHelper inputHelper;
 
-    public ViewEditMenu(InputHelper inputHelper){
+    private final IngredientService ingredientService;
+    private final EditIngredientMenu editIngredientMenu;
+
+    public EditMenu(InputHelper inputHelper, IngredientService ingredientService){
         this.inputHelper = inputHelper;
+        this.ingredientService = ingredientService;
+        this.editIngredientMenu = new EditIngredientMenu(inputHelper, ingredientService);
     }
 
     public void runMenu(){
-        boolean tryAgain = false;
+
+        boolean tryAgain = true;
 
         do{
             System.out.println("""
                     \r\n
-                    What would you like to do?
+                    ***** View & Edit *****
                     1: View/Edit Ingredients
                     2: View/Edit Meals
                     3: Return
@@ -26,12 +32,14 @@ public class ViewEditMenu {
             int choice = inputHelper.getIntegerInput();
 
             if(choice == 1){
-
+                editIngredientMenu.runMenu();
             }if(choice == 2){
 
             }if(choice == 3){
-                return;
+                tryAgain = false;
             }
+
         }while(tryAgain);
+
     }
 }

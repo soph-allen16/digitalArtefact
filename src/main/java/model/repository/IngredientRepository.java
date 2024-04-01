@@ -28,4 +28,24 @@ public class IngredientRepository {
             ingredientList.add(ingredient);
         }
     }
+
+    public boolean modifyIngredient(String name){
+        if (  findIngredient(name) == null ){
+            System.out.println("The ingredient you entered does not exist.");
+            return false;
+        }else{
+            Ingredient old = findIngredient(name);
+            Ingredient newIngredient = new Ingredient( name, old.getIngredientType() );
+            return true;
+        }
+    }
+
+    public Ingredient findIngredient(String name){
+        for( Ingredient i : ingredientList ) {
+            if (i.getIngredientName().equals(name)) {
+                return i;
+            }
+        }
+        return null;
+    }
 }

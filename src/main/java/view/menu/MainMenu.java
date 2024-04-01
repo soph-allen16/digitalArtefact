@@ -1,26 +1,25 @@
-package view;
+package view.menu;
 
-import view.service.IngredientService;
-import model.entity.User;
 import utils.InputHelper;
+import view.service.IngredientService;
 
 public class MainMenu {
     //private final User user;
     private final InputHelper inputHelper;
 
-    private final ViewEditMenu viewEditMenu;
+    private final EditMenu editMenu;
     private final IngredientService ingredientService;
 
-    public MainMenu(InputHelper inputHelper) {
+    public MainMenu(InputHelper inputHelper, IngredientService ingredientService) {
         this.inputHelper = inputHelper;
-        this.viewEditMenu = new ViewEditMenu(inputHelper);
         //this.user = new User(inputHelper);
-        this.ingredientService = new IngredientService(inputHelper);
+        this.ingredientService = ingredientService;
+        this.editMenu = new EditMenu(inputHelper, ingredientService);
         runMenu();
     }
 
     private void runMenu() {
-        boolean tryAgain = false;
+        boolean tryAgain = true;
 
         do {
             System.out.println("""
@@ -35,17 +34,14 @@ public class MainMenu {
             int choice = inputHelper.getIntegerInput();
 
             if (choice == 1) {
-                viewEditMenu.runMenu();
-                tryAgain = true;
+                editMenu.runMenu();
             } else if (choice == 2) {
                 ingredientService.viewIngredientList();
-                tryAgain = true;
             } else if (choice == 3) {
                 tryAgain = false;
                 //System.exit(0);
             } else {
                 System.out.println("incorrect input. Please try again");
-                tryAgain = true;
             }
         } while (tryAgain);
 
