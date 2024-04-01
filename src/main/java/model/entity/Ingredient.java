@@ -48,4 +48,9 @@ public class Ingredient {
         Ingredient i = (Ingredient) obj;
         return this.ingredientName.equalsIgnoreCase(i.getIngredientName());
     }
+
+    public String[] toArray(){
+        String[] array = new String[] {Integer.toString(this.ingredientId), this.ingredientName, this.ingredientType};
+        return array;
+    }
 }

@@ -4,21 +4,28 @@ package view.service;
 import model.repository.IngredientRepository;
 import utils.InputHelper;
 import model.entity.Ingredient;
+import utils.TableHelper;
 
 public class IngredientService {
     private final InputHelper inputHelper;
     private final IngredientRepository ingredientRepository;
+    private final TableHelper tableHelper;
 
     public IngredientService(InputHelper inputHelper){
+        this.tableHelper = new TableHelper( new String[] {"ID", "Name", "Type"} );
         this.inputHelper = inputHelper;
         this.ingredientRepository = new IngredientRepository(this.inputHelper);
     }
 
     public void viewIngredientList(){
-        System.out.println("\r\n ID | Name | Type");
-        for(Ingredient i : ingredientRepository.getAllIngredients()){
-            System.out.println(i.getIngredientId() + "   " + i.getIngredientName() + "   " + i.getIngredientType());
-        }
+//        System.out.println("""
+//        ***** Ingredients *****
+//            ID | Name | Type
+//       """);
+//        for(Ingredient i : ingredientRepository.getAllIngredients()){
+//            System.out.println(i.getIngredientId() + "   " + i.getIngredientName() + "   " + i.getIngredientType());
+//        }
+        tableHelper.print(ingredientRepository.getAllIngredients());
     }
 
     public void addIngredient(){

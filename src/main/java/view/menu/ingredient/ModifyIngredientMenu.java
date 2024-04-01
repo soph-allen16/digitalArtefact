@@ -26,7 +26,8 @@ public class ModifyIngredientMenu {
         while(tryAgain) {
             Ingredient newIngredient = ingredient ;
 
-            System.out.println(  "\r\n Ingredient: " + ingredient.getIngredientName() + " Type: " + ingredient.getIngredientType());
+            System.out.println( "\r\nIngredient: " + ingredient.getIngredientName());
+            System.out.println("Type: " + ingredient.getIngredientType());
             System.out.println("""
                         \r\n
                         1: Modify name
