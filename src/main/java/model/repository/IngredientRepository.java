@@ -56,43 +56,10 @@ public class IngredientRepository {
         return null;
     }
 
-    public void modifyIngredientMenu(Ingredient ingredient){
-        if (  ingredient == null ){
-            System.out.println("The ingredient you entered does not exist.");
-        }else{
-            boolean tryAgain = true;
-
-            while(tryAgain) {
-                Ingredient newIngredient = ingredient ;
-
-                System.out.println(  "\r\n Ingredient: " + ingredient.getIngredientName() + " Type: " + ingredient.getIngredientType());
-                System.out.println("""
-                        \r\n
-                        1: Modify name
-                        2: Modify type
-                        3: Save
-                        4: Cancel
-                        """);
-                int choice = inputHelper.getIntegerInput();
-
-                if( choice == 1 ){
-                    String newName = inputHelper.getStringInput("Please enter a name");
-                    newIngredient.setIngredientName( newName );
-                }else if( choice == 2 ){
-                    String newType = inputHelper.getStringInput("Please enter a type");
-                    newIngredient.setIngredientType( newType );
-                }else if( choice == 3 ){
-                    int index = ingredientList.indexOf(ingredient);
-                    ingredientList.set(index, newIngredient);
-                    tryAgain = false;
-                }else if( choice == 4 ){
-                    tryAgain = false;
-                }else{
-                    System.out.println("Invalid input. Please try again.");
-                }
-
-            }
-        }
+    public void updateIngredient(Ingredient ingredient){
+        Ingredient oldIngredient = findIngredientById(ingredient.getIngredientId());
+        int index = ingredientList.indexOf(oldIngredient);
+        ingredientList.set(index, ingredient);
     }
 
 }

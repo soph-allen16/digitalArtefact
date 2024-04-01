@@ -2,7 +2,7 @@ package view.menu;
 
 import utils.InputHelper;
 import view.service.IngredientService;
-import view.menu.EditIngredientMenu;
+import view.menu.ingredient.EditIngredientMenu;
 
 public class EditMenu {
     private final InputHelper inputHelper;

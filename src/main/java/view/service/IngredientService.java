@@ -27,9 +27,9 @@ public class IngredientService {
         ingredientRepository.addIngredient( name, type );
     }
 
-    public void modifyIngredient(){
+    public Ingredient findIngredientById(){
         int id = inputHelper.getIntegerInput("Enter the ID of the ingredient you would like to modify");
-        ingredientRepository.modifyIngredientMenu( ingredientRepository.findIngredientById(id) );
+        return ingredientRepository.findIngredientById(id);
     }
 
     public void deleteIngredient(){
@@ -45,6 +45,14 @@ public class IngredientService {
             System.out.println( "Ingredient not deleted.");
         }else{
             System.out.println("Invalid input - please try again.");
+        }
+    }
+
+    public void updateIngredient(Ingredient ingredient){
+        if( ingredient == null ){
+            return;
+        }else{
+            ingredientRepository.updateIngredient(ingredient);
         }
     }
 }
