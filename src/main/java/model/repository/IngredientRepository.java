@@ -29,18 +29,17 @@ public class IngredientRepository {
         }
     }
 
-    public boolean modifyIngredient(String name){
-        if (  findIngredient(name) == null ){
+    public void removeIngredient( String name ){
+        Ingredient ingredient = findIngredientByName( name );
+
+        if( ingredient == null ){
             System.out.println("The ingredient you entered does not exist.");
-            return false;
         }else{
-            Ingredient old = findIngredient(name);
-            Ingredient newIngredient = new Ingredient( name, old.getIngredientType() );
-            return true;
+            ingredientList.remove(ingredient);
         }
     }
 
-    public Ingredient findIngredient(String name){
+    public Ingredient findIngredientByName(String name){
         for( Ingredient i : ingredientList ) {
             if (i.getIngredientName().equals(name)) {
                 return i;
@@ -48,4 +47,37 @@ public class IngredientRepository {
         }
         return null;
     }
+
+    public void modifyIngredientMenu(Ingredient ingredient){
+        if (  ingredient == null ){
+            System.out.println("The ingredient you entered does not exist.");
+        }else{
+            boolean tryAgain = true;
+
+            while(tryAgain) {
+                System.out.println("Ingredient: " + ingredient.getIngredientName() + " Type: " + ingredient.getIngredientType());
+                System.out.println("""
+                        1: Modify name
+                        2: Modify type
+                        3: Save
+                        4: Cancel
+                        """);
+                int choice = inputHelper.getIntegerInput();
+
+                if( choice == 1 ){
+
+                }else if( choice == 2 ){
+
+                }else if( choice == 3 ){
+
+                }else if( choice == 4 ){
+
+                }else{
+                    System.out.println("Invalid input. Please try again.");
+                }
+            }
+
+        }
+    }
+
 }

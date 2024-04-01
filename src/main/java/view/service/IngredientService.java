@@ -25,4 +25,8 @@ public class IngredientService {
         String type = inputHelper.getStringInput("please enter an ingredient type");
         ingredientRepository.addIngredient(name,type);
     }
+
+    public void modifyIngredient(){
+        ingredientRepository.modifyIngredient( inputHelper.getStringInput("Which ingredient would you like to modify?") );
+    }
 }
