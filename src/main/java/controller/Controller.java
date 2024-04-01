@@ -1,8 +1,8 @@
 package controller;
 
-import utils.InputHelper;
 import view.menu.MainMenu;
 import view.service.IngredientService;
+import utils.InputHelper;
 
 public class Controller {
     private final InputHelper inputHelper;

@@ -1,9 +1,7 @@
 package model.repository;
 
-import model.entity.Ingredient;
 import utils.InputHelper;
-
-
+import model.entity.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class IngredientRepository {
     }
 
     public void addIngredient(String ingredientName, String ingredientType){
-        Ingredient ingredient = new Ingredient(ingredientName, ingredientType);
+        Ingredient ingredient = new Ingredient( ingredientName, ingredientType,ingredientList.size()+1 );
         if( ingredientList.contains(ingredient) ){
             System.out.println("This ingredient is already in the list");
         }else{
@@ -48,6 +46,15 @@ public class IngredientRepository {
         return null;
     }
 
+    public Ingredient findIngredientById(int id){
+        for( Ingredient i : ingredientList ) {
+            if ( i.getIngredientId() == id ) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     public void modifyIngredientMenu(Ingredient ingredient){
         if (  ingredient == null ){
             System.out.println("The ingredient you entered does not exist.");
@@ -55,8 +62,11 @@ public class IngredientRepository {
             boolean tryAgain = true;
 
             while(tryAgain) {
+                Ingredient newIngredient = ingredient ;
+
                 System.out.println("Ingredient: " + ingredient.getIngredientName() + " Type: " + ingredient.getIngredientType());
                 System.out.println("""
+                        \r\n
                         1: Modify name
                         2: Modify type
                         3: Save
@@ -65,18 +75,22 @@ public class IngredientRepository {
                 int choice = inputHelper.getIntegerInput();
 
                 if( choice == 1 ){
-
+                    String newName = inputHelper.getStringInput("Please enter a name");
+                    newIngredient.setIngredientName( newName );
                 }else if( choice == 2 ){
-
+                    String newType = inputHelper.getStringInput("Please enter a type");
+                    newIngredient.setIngredientType( newType );
                 }else if( choice == 3 ){
-
+                    int index = ingredientList.indexOf(ingredient);
+                    ingredientList.set(index, newIngredient);
+                    tryAgain = false;
                 }else if( choice == 4 ){
-
+                    tryAgain = false;
                 }else{
                     System.out.println("Invalid input. Please try again.");
                 }
-            }
 
+            }
         }
     }
 

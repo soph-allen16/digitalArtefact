@@ -33,7 +33,9 @@ public class EditIngredientMenu {
                 ingredientService.viewIngredientList();
             } else if (choice == 2) {
                 ingredientService.addIngredient();
-            } else if (choice ==4){
+            }else if(choice ==3){
+                ingredientService.modifyIngredient();
+            }else if (choice ==4){
                 tryAgain = false;
             }else{
                 System.out.println("Incorrect input, please try again.");

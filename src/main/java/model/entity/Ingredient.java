@@ -1,12 +1,17 @@
 package model.entity;
 
 public class Ingredient {
+    private int ingredientId;
     private String ingredientType;
     private String ingredientName;
 
     public Ingredient(String ingredientName, String ingredientType){
         this.ingredientName = ingredientName;
         this.ingredientType = ingredientType;
+    }
+    public Ingredient(String ingredientName, String ingredientType, int ingredientId){
+        this(ingredientName, ingredientType);
+        this.ingredientId = ingredientId;
     }
 
     public String getIngredientType() {
@@ -25,6 +30,14 @@ public class Ingredient {
         this.ingredientName = ingredientName;
     }
 
+    public int getIngredientId() {
+        return ingredientId;
+    }
+
+    public void setIngredientId(int ingredientId) {
+        this.ingredientId = ingredientId;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if( obj == this){
@@ -33,6 +46,6 @@ public class Ingredient {
             return false;
         }
         Ingredient i = (Ingredient) obj;
-        return this.ingredientName.equals(i.getIngredientName());
+        return this.ingredientName.equalsIgnoreCase(i.getIngredientName());
     }
 }

@@ -1,9 +1,9 @@
 package view.service;
 
 
-import model.entity.Ingredient;
 import model.repository.IngredientRepository;
 import utils.InputHelper;
+import model.entity.Ingredient;
 
 public class IngredientService {
     private final InputHelper inputHelper;
@@ -15,8 +15,9 @@ public class IngredientService {
     }
 
     public void viewIngredientList(){
+        System.out.println("ID | Name | Type");
         for(Ingredient i : ingredientRepository.getAllIngredients()){
-            System.out.println("name: " + i.getIngredientName() + " type: " + i.getIngredientType());
+            System.out.println(i.getIngredientId() + "   " + i.getIngredientName() + "   " + i.getIngredientType());
         }
     }
 
@@ -27,6 +28,7 @@ public class IngredientService {
     }
 
     public void modifyIngredient(){
-        ingredientRepository.modifyIngredient( inputHelper.getStringInput("Which ingredient would you like to modify?") );
+        int id = inputHelper.getIntegerInput("Enter the ID of the ingredient you would like to modify");
+        ingredientRepository.modifyIngredientMenu( ingredientRepository.findIngredientById(id) );
     }
 }

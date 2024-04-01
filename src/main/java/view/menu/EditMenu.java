@@ -2,6 +2,7 @@ package view.menu;
 
 import utils.InputHelper;
 import view.service.IngredientService;
+import view.menu.EditIngredientMenu;
 
 public class EditMenu {
     private final InputHelper inputHelper;
