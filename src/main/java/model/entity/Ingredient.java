@@ -1,5 +1,7 @@
 package model.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Ingredient {
     private int ingredientId;
     private String ingredientType;
@@ -50,7 +52,7 @@ public class Ingredient {
     }
 
     public String[] toArray(){
-        String[] array = new String[] {Integer.toString(this.ingredientId), this.ingredientName, this.ingredientType};
+        String[] array = new String[] {StringUtils.center(Integer.toString(this.ingredientId), 15), StringUtils.center(this.ingredientName,15) , StringUtils.center(this.ingredientType,15) };
         return array;
     }
 }

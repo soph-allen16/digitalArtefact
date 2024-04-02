@@ -2,6 +2,7 @@ package view.service;
 
 
 import model.repository.IngredientRepository;
+import org.apache.commons.lang3.StringUtils;
 import utils.InputHelper;
 import model.entity.Ingredient;
 import utils.TableHelper;
@@ -18,15 +19,10 @@ public class IngredientService {
     }
 
     public void viewIngredientList(){
-//        System.out.println("""
-//        ***** Ingredients *****
-//            ID | Name | Type
-//       """);
-//        for(Ingredient i : ingredientRepository.getAllIngredients()){
-//            System.out.println(i.getIngredientId() + "   " + i.getIngredientName() + "   " + i.getIngredientType());
-//        }
+        System.out.println(StringUtils.center("***** Ingredients *****", 49));
         tableHelper.print(ingredientRepository.getAllIngredients());
     }
+
 
     public void addIngredient(){
         String name = inputHelper.getStringInput("Please enter the name of the ingredient");

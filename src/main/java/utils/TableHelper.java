@@ -1,7 +1,9 @@
 package utils;
 
 import model.entity.Ingredient;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TableHelper {
@@ -15,12 +17,13 @@ public class TableHelper {
     }
 
     public void print(List<Ingredient> ingredientList){
-        String[][] table =  ingredientList.stream().map(i -> i.toArray()).toArray(String[][]::new);
+        String[][] table =  ingredientList.stream().map(Ingredient::toArray).toArray(String[][]::new);
+        headers = Arrays.stream(headers).map(s -> StringUtils.center(s, 15)).toArray(String[] ::new);
 
-        System.out.format("%-15s%-15s%-15s%n",headers);
-        System.out.println("_____________________________________________");
+        System.out.format("|%-15s|%-15s|%-15s|%n",headers);
+        System.out.println("_________________________________________________");
         for( String[] row : table){
-            System.out.format("%-15s%-15s%-15s%n", row);
+            System.out.format("|%-15s|%-15s|%-15s|%n", row);
         }
     }
 }
