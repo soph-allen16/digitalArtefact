@@ -7,9 +7,16 @@ public class Ingredient {
     private String ingredientType;
     private String ingredientName;
 
-    public Ingredient(String ingredientName, String ingredientType){
+    public Ingredient(String ingredientName){
         this.ingredientName = ingredientName;
+    }
+    public Ingredient(String ingredientName, String ingredientType){
+        this(ingredientName);
         this.ingredientType = ingredientType;
+    }
+    public Ingredient(String ingredientName, int ingredientId){
+        this(ingredientName);
+        this.ingredientId = ingredientId;
     }
     public Ingredient(String ingredientName, String ingredientType, int ingredientId){
         this(ingredientName, ingredientType);

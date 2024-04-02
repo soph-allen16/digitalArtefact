@@ -28,7 +28,7 @@ public class EditIngredientMenu {
                     3: Edit ingredient
                     4: Delete ingredient
                     5: Return
-                    Please select (1-4)
+                    Please select (1-5)
                     """);
 
             int choice = inputHelper.getIntegerInput();

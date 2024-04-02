@@ -1,14 +1,16 @@
 package model.entity;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.StrBuilder;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Meal {
     private int mealId;
     private String mealName;
     private String mealType;
-    List<Ingredient> ingredients;
+    private HashMap<Ingredient, Integer> ingredients;
 
     public Meal(String mealName, String mealType){
         this.mealName = mealName;
@@ -43,11 +45,11 @@ public class Meal {
         this.mealType = mealType;
     }
 
-    public List<Ingredient> getIngredients() {
+    public HashMap<Ingredient, Integer> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(HashMap<Ingredient, Integer> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -65,4 +67,20 @@ public class Meal {
         String[] array = new String[] {StringUtils.center(Integer.toString(this.mealId), 15), StringUtils.center(this.mealName,15) , StringUtils.center(this.mealType,15) };
         return array;
     }
+
+//    @Override
+//    public String toString(){
+//        StrBuilder str = new StrBuilder();
+//        str.append("Name: ").append(this.mealName);
+//        str.appendNewLine();
+//        str.append("Type: ").append(this.mealType);
+//        str.appendNewLine();
+//        str.append("Ingredients:");
+//
+//
+//        for(Ingredient i : ingredients){
+//            str.appendNewLine();
+//            str.append()
+//        }
+//    }
 }

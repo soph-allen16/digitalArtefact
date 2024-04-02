@@ -30,9 +30,17 @@ public class IngredientService {
         ingredientRepository.addIngredient( name, type );
     }
 
+    public Ingredient addIngredient(String name){
+        return ingredientRepository.addIngredient(name);
+    }
+
     public Ingredient findIngredientById(){
         int id = inputHelper.getIntegerInput("Enter the ID of the ingredient you would like to modify");
         return ingredientRepository.findIngredientById(id);
+    }
+
+    public Ingredient findIngredientByName(String name){
+         return ingredientRepository.findIngredientByName(name);
     }
 
     public void deleteIngredient(){
@@ -51,11 +59,11 @@ public class IngredientService {
         }
     }
 
-    public void updateIngredient(Ingredient ingredient){
+    public void updateIngredient(Ingredient ingredient, String newName, String newType ){
         if( ingredient == null ){
             return;
         }else{
-            ingredientRepository.updateIngredient(ingredient);
+            ingredientRepository.updateIngredient(ingredient, newName, newType);
         }
     }
 }

@@ -1,19 +1,29 @@
 package view.menu;
 
 import utils.InputHelper;
+import view.menu.meal.EditMealMenu;
 import view.service.IngredientService;
 import view.menu.ingredient.EditIngredientMenu;
+import view.service.MealService;
+
+import java.awt.*;
 
 public class EditMenu {
     private final InputHelper inputHelper;
 
     private final IngredientService ingredientService;
     private final EditIngredientMenu editIngredientMenu;
+    private final MealService mealService;
+    private final EditMealMenu editMealMenu;
 
-    public EditMenu(InputHelper inputHelper, IngredientService ingredientService){
+    public EditMenu(InputHelper inputHelper,
+                    IngredientService ingredientService,
+                    MealService mealService){
         this.inputHelper = inputHelper;
         this.ingredientService = ingredientService;
+        this.mealService = mealService;
         this.editIngredientMenu = new EditIngredientMenu(inputHelper, ingredientService);
+        this.editMealMenu = new EditMealMenu(inputHelper, mealService);
     }
 
     public void runMenu(){
@@ -35,7 +45,7 @@ public class EditMenu {
             if(choice == 1){
                 editIngredientMenu.runMenu();
             }if(choice == 2){
-
+                editMealMenu.runMenu();
             }if(choice == 3){
                 tryAgain = false;
             }else{

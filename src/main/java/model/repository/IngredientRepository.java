@@ -21,12 +21,22 @@ public class IngredientRepository {
     }
 
     public void addIngredient(String ingredientName, String ingredientType){
-        Ingredient ingredient = new Ingredient( ingredientName, ingredientType, counter + 1);
-        if( ingredientList.contains(ingredient) ){
+        Ingredient ingredient = addIngredient(ingredientName);
+        if(ingredient != null) {
+            ingredient.setIngredientType(ingredientType);
+        }
+    }
+
+    public Ingredient addIngredient(String ingredientName){
+        Ingredient ingredient = new Ingredient(ingredientName, counter);
+
+        if(ingredientList.contains(ingredient)){
             System.out.println("This ingredient is already in the list");
+            return null;
         }else{
             ingredientList.add(ingredient);
-            counter ++;
+            counter++;
+            return ingredient;
         }
     }
 
@@ -40,7 +50,7 @@ public class IngredientRepository {
 
     public Ingredient findIngredientByName(String name){
         for( Ingredient i : ingredientList ) {
-            if (i.getIngredientName().equals(name)) {
+            if (i.getIngredientName().equalsIgnoreCase(name)) {
                 return i;
             }
         }
@@ -56,10 +66,17 @@ public class IngredientRepository {
         return null;
     }
 
-    public void updateIngredient(Ingredient ingredient){
-        Ingredient oldIngredient = findIngredientById(ingredient.getIngredientId());
-        int index = ingredientList.indexOf(oldIngredient);
-        ingredientList.set(index, ingredient);
-    }
+    public void updateIngredient(Ingredient ingredient, String newName, String newType){
+        int index = ingredientList.indexOf(ingredient);
 
+        Ingredient alreadyExists = findIngredientByName(newName);
+
+        if(ingredient.getIngredientId() != alreadyExists.getIngredientId()){
+            System.out.println("This operation cannot be performed: ingredient already exists");
+        }else if( ! newName.isBlank() ) {
+            ingredient.setIngredientName(newName);
+        }else if(!newType.isBlank()){
+            ingredient.setIngredientType(newType);
+        }
+    }
 }

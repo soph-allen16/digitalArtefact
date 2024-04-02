@@ -22,12 +22,14 @@ public class ModifyIngredientMenu {
             return;
         }
 
+        String newName = ingredient.getIngredientName();
+        String newType = ingredient.getIngredientType();
+
         boolean tryAgain = true;
         while(tryAgain) {
-            Ingredient newIngredient = ingredient ;
 
-            System.out.println( "\r\nIngredient: " + ingredient.getIngredientName());
-            System.out.println("Type: " + ingredient.getIngredientType());
+            System.out.println( "\r\nIngredient: " + newName);
+            System.out.println("Type: " + newType);
             System.out.println("""
                         \r\n
                         1: Modify name
@@ -39,13 +41,11 @@ public class ModifyIngredientMenu {
             int choice = inputHelper.getIntegerInput();
 
             if( choice == 1 ){
-                String newName = inputHelper.getStringInput("Please enter a name");
-                newIngredient.setIngredientName( newName );
+                newName = inputHelper.getStringInput("Please enter a name");
             }else if( choice == 2 ){
-                String newType = inputHelper.getStringInput("Please enter a type");
-                newIngredient.setIngredientType( newType );
+                newType = inputHelper.getStringInput("Please enter a type");
             }else if( choice == 3 ){
-                ingredientService.updateIngredient(newIngredient);
+                ingredientService.updateIngredient(ingredient, newName, newType);
                 tryAgain = false;
             }else if( choice == 4 ){
                 tryAgain = false;

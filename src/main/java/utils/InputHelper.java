@@ -1,6 +1,10 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputHelper {
     private final Scanner scanner = new Scanner(System.in);
@@ -22,6 +26,28 @@ public class InputHelper {
     }
     public String getStringInput(){
         return scanner.nextLine();
+    }
+
+    public ArrayList<String> getListInput(){
+        ArrayList<String> list = new ArrayList<>();
+        String line;
+
+        while(true){
+            line = scanner.nextLine();
+            if(line.equalsIgnoreCase("")){
+                break;
+            }else{
+                list.add(line);
+            }
+        }
+
+        return list;
+    }
+
+    public ArrayList<String> getCommaSeparatedInput(String prompt){
+        String input = getStringInput(prompt);
+        ArrayList<String> list = new ArrayList<>( Arrays.stream(input.split(",")).map(String::trim).toList()  );
+        return list;
     }
 
     public void closeScanner(){

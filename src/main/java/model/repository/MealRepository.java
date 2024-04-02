@@ -1,5 +1,6 @@
 package model.repository;
 
+import model.entity.Ingredient;
 import model.entity.Meal;
 import utils.InputHelper;
 
@@ -30,6 +31,7 @@ public class MealRepository {
             counter++;
         }
     }
+
 
     public void removeMeal(Meal meal){
         if( meal == null ){
