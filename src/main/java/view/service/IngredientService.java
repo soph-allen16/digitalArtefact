@@ -20,7 +20,7 @@ public class IngredientService {
 
     public void viewIngredientList(){
         System.out.println(StringUtils.center("***** Ingredients *****", 49));
-        tableHelper.print(ingredientRepository.getAllIngredients());
+        tableHelper.printIngredients(ingredientRepository.getAllIngredients());
     }
 
 
