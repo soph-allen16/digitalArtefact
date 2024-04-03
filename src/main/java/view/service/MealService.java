@@ -31,31 +31,41 @@ public class MealService {
     }
 
     //view single
-    public void viewSingleMeal(int id){
+    public void viewMealDetails(int id){
         Meal meal = mealRepository.findMealById(id);
+        System.out.println(meal.toString());
     }
 
+    //add meal
     public void addMeal(){
+        //Gather meal info
         String name = inputHelper.getStringInput("Please enter a meal name");
         String type = inputHelper.getStringInput("Please enter a type");
 
-        ArrayList<String> ingredients = inputHelper.getCommaSeparatedInput("Please enter ingredients separated by commas (Quantities to be added after)");
+        // Get a list of the ingredients as strings
+        ArrayList<String> inputIngredients = inputHelper.getCommaSeparatedInput("Please enter ingredients separated by commas (Quantities to be added after)");
 
-        HashMap<Ingredient, Integer> quantities = new HashMap<>();
+        HashMap<Ingredient, Integer> ingredients = new HashMap<>();
 
         System.out.println("Please enter quantities for the following ingredients: ");
-        for(String s : ingredients ){
+        //Gather quantities of each ingredient in the list
+        for(String s : inputIngredients ){
             Ingredient ingredient;
             if( ingredientService.findIngredientByName(s)==null ){
+                //If the ingredient isn't already in the list, add it
                 ingredient = ingredientService.addIngredient(s);
             }else{
+                //If it is already in the list, get it
                 ingredient = ingredientService.findIngredientByName(s);
             }
-            quantities.put(ingredient, inputHelper.getIntegerInput( ingredient.getIngredientName() ));
+
+            //Add to the quantity map the ingredient and the quantity the user enters
+            ingredients.put(ingredient, inputHelper.getIntegerInput( ingredient.getIngredientName() ));
         }
-        System.out.println(quantities);
+
+        mealRepository.addMeal(name, type, ingredients);
     }
-    //add meal
+
     //find by id
     //delete
     //update

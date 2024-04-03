@@ -20,24 +20,25 @@ public class EditMealMenu {
             System.out.println("""
                     \r\n
                     ***** View/Edit Ingredients *****
-                    1: Add Meal
-                    2: 
-                    3: 
-                    4: 
-                    5: Return
+                    1: View list of meals
+                    2: View meal details
+                    3: Add meal
+                    4: Edit meal
+                    5: Delete meal
+                    6: Return
                     Please select (1-5)
                     """);
 
             int choice = inputHelper.getIntegerInput();
 
             if(choice == 1){
+                mealService.viewMealList();
+            } else if (choice == 2) {
+                mealService.viewMealDetails(inputHelper.getIntegerInput("Enter a meal ID"));
+            }else if(choice == 3) {
                 mealService.addMeal();
-//            } else if (choice == 2) {
-//                ingredientService.addIngredient();
-//            }else if(choice ==3) {
-//                modifyIngredientMenu.runMenu();
-//            }else if ( choice == 4){
-//                ingredientService.deleteIngredient();
+            }else if ( choice == 4){
+
             }else if (choice == 5){
                 tryAgain = false;
             }else{

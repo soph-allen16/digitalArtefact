@@ -21,6 +21,11 @@ public class Meal {
         this.mealId = mealId;
     }
 
+    public Meal(int mealId, String mealName, String mealType, HashMap<Ingredient, Integer> ingredients){
+        this(mealId, mealName, mealType);
+        this.ingredients = ingredients;
+    }
+
     public int getMealId() {
         return mealId;
     }
@@ -68,19 +73,20 @@ public class Meal {
         return array;
     }
 
-//    @Override
-//    public String toString(){
-//        StrBuilder str = new StrBuilder();
-//        str.append("Name: ").append(this.mealName);
-//        str.appendNewLine();
-//        str.append("Type: ").append(this.mealType);
-//        str.appendNewLine();
-//        str.append("Ingredients:");
-//
-//
-//        for(Ingredient i : ingredients){
-//            str.appendNewLine();
-//            str.append()
-//        }
-//    }
+    @Override
+    public String toString(){
+        StrBuilder str = new StrBuilder();
+        str.append("Name: ").append(this.mealName);
+        str.appendNewLine();
+        str.append("Type: ").append(this.mealType);
+        str.appendNewLine();
+        str.append("Ingredients:");
+
+        for( Ingredient i : ingredients.keySet() ){
+            str.appendNewLine();
+            str.append( ingredients.get(i) ).append(" x ").append(i.getIngredientName());
+        }
+
+        return str.build();
+    }
 }

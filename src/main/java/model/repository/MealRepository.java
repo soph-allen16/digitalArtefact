@@ -5,6 +5,7 @@ import model.entity.Meal;
 import utils.InputHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MealRepository {
@@ -22,8 +23,8 @@ public class MealRepository {
         return this.mealList;
     }
 
-    public void addMeal(String mealName, String mealType){
-        Meal meal = new Meal(counter+1, mealName, mealType);
+    public void addMeal(String mealName, String mealType, HashMap<Ingredient, Integer> ingredients){
+        Meal meal = new Meal(counter , mealName, mealType, ingredients);
         if( mealList.contains(meal) ){
             System.out.println("This meal already exists!");
         }else{
@@ -31,7 +32,6 @@ public class MealRepository {
             counter++;
         }
     }
-
 
     public void removeMeal(Meal meal){
         if( meal == null ){

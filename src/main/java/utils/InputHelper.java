@@ -25,7 +25,12 @@ public class InputHelper {
         return getStringInput();
     }
     public String getStringInput(){
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        if(input.isBlank()) {
+            System.out.println("Input cannot be blank. Please try again.");
+            getStringInput();
+        }
+        return input;
     }
 
     public ArrayList<String> getListInput(){

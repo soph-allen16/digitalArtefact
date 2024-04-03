@@ -69,9 +69,10 @@ public class IngredientRepository {
     public void updateIngredient(Ingredient ingredient, String newName, String newType){
         int index = ingredientList.indexOf(ingredient);
 
+        //null if ingredient doesn't already exist - can't be found
         Ingredient alreadyExists = findIngredientByName(newName);
 
-        if(ingredient.getIngredientId() != alreadyExists.getIngredientId()){
+        if( (alreadyExists != null) && (ingredient.getIngredientId() != alreadyExists.getIngredientId()) ){
             System.out.println("This operation cannot be performed: ingredient already exists");
         }else if( ! newName.isBlank() ) {
             ingredient.setIngredientName(newName);
