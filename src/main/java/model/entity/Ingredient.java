@@ -4,31 +4,15 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Ingredient {
     private int ingredientId;
-    private String ingredientType;
-    private String ingredientName;
+    private String ingredientName = "" ;
 
     public Ingredient(String ingredientName){
         this.ingredientName = ingredientName;
     }
-    public Ingredient(String ingredientName, String ingredientType){
-        this(ingredientName);
-        this.ingredientType = ingredientType;
-    }
+
     public Ingredient(String ingredientName, int ingredientId){
         this(ingredientName);
         this.ingredientId = ingredientId;
-    }
-    public Ingredient(String ingredientName, String ingredientType, int ingredientId){
-        this(ingredientName, ingredientType);
-        this.ingredientId = ingredientId;
-    }
-
-    public String getIngredientType() {
-        return ingredientType;
-    }
-
-    public void setIngredientType(String ingredientType) {
-        this.ingredientType = ingredientType;
     }
 
     public String getIngredientName() {
@@ -59,7 +43,7 @@ public class Ingredient {
     }
 
     public String[] toArray(){
-        String[] array = new String[] {StringUtils.center(Integer.toString(this.ingredientId), 15), StringUtils.center(this.ingredientName,15) , StringUtils.center(this.ingredientType,15) };
+        String[] array = new String[] {StringUtils.center(Integer.toString(this.ingredientId), 15), StringUtils.center(this.ingredientName,15)};
         return array;
     }
 }

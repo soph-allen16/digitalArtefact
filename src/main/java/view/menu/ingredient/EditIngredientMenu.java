@@ -8,12 +8,12 @@ public class EditIngredientMenu {
     private final IngredientService ingredientService;
     private final InputHelper inputHelper;
 
-    private final ModifyIngredientMenu modifyIngredientMenu;
+
 
     public EditIngredientMenu(InputHelper inputHelper, IngredientService ingredientService){
         this.inputHelper = inputHelper;
         this.ingredientService = ingredientService;
-        this.modifyIngredientMenu = new ModifyIngredientMenu(inputHelper, ingredientService);
+
     }
 
     public void runMenu(){
@@ -38,7 +38,7 @@ public class EditIngredientMenu {
             } else if (choice == 2) {
                 ingredientService.addIngredient();
             }else if(choice ==3) {
-                modifyIngredientMenu.runMenu();
+                ingredientService.editIngredient();
             }else if ( choice == 4){
                 ingredientService.deleteIngredient();
             }else if (choice == 5){

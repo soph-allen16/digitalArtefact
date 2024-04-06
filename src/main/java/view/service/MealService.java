@@ -50,6 +50,10 @@ public class MealService {
         System.out.println("Please enter quantities for the following ingredients: ");
         //Gather quantities of each ingredient in the list
         for(String s : inputIngredients ){
+            if(s.isBlank()){
+                continue;
+            }
+
             Ingredient ingredient;
             if( ingredientService.findIngredientByName(s)==null ){
                 //If the ingredient isn't already in the list, add it

@@ -10,18 +10,13 @@ import java.awt.*;
 
 public class EditMenu {
     private final InputHelper inputHelper;
-
-    private final IngredientService ingredientService;
     private final EditIngredientMenu editIngredientMenu;
-    private final MealService mealService;
     private final EditMealMenu editMealMenu;
 
     public EditMenu(InputHelper inputHelper,
                     IngredientService ingredientService,
                     MealService mealService){
         this.inputHelper = inputHelper;
-        this.ingredientService = ingredientService;
-        this.mealService = mealService;
         this.editIngredientMenu = new EditIngredientMenu(inputHelper, ingredientService);
         this.editMealMenu = new EditMealMenu(inputHelper, mealService);
     }

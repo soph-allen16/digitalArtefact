@@ -7,27 +7,31 @@ import utils.InputHelper;
 import model.entity.Ingredient;
 import utils.TableHelper;
 
+import java.util.stream.Stream;
+
 public class IngredientService {
     private final InputHelper inputHelper;
     private final IngredientRepository ingredientRepository;
     private final TableHelper tableHelper;
 
     public IngredientService(InputHelper inputHelper){
-        this.tableHelper = new TableHelper( new String[] {"ID", "Name", "Type"} );
+        this.tableHelper = new TableHelper( new String[] {"ID", "Name"} );
         this.inputHelper = inputHelper;
         this.ingredientRepository = new IngredientRepository(this.inputHelper);
     }
 
     public void viewIngredientList(){
         System.out.println(StringUtils.center("***** Ingredients *****", 49));
-        tableHelper.printIngredients(ingredientRepository.getAllIngredients());
+        //tableHelper.printIngredients(ingredientRepository.getAllIngredients());
+        for(Ingredient i : ingredientRepository.getAllIngredients()){
+            System.out.println(i.getIngredientId() + " "+ i.getIngredientName());
+        }
     }
 
 
     public void addIngredient(){
         String name = inputHelper.getStringInput("Please enter the name of the ingredient");
-        String type = inputHelper.getStringInput("please enter an ingredient type");
-        ingredientRepository.addIngredient( name, type );
+        ingredientRepository.addIngredient( name );
     }
 
     public Ingredient addIngredient(String name){
@@ -59,11 +63,8 @@ public class IngredientService {
         }
     }
 
-    public void updateIngredient(Ingredient ingredient, String newName, String newType ){
-        if( ingredient == null ){
-            return;
-        }else{
-            ingredientRepository.updateIngredient(ingredient, newName, newType);
-        }
+    public void editIngredient(){
+        int choice = inputHelper.getIntegerInput("Please enter the ID of the ingredient you would like to rename"   );
+        ingredientRepository.updateIngredient(choice, inputHelper.getStringInput("Enter a new name"));
     }
 }
