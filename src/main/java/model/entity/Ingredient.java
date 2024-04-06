@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Ingredient {
     private int ingredientId;
-    private String ingredientName = "" ;
+    private String ingredientName;
 
     public Ingredient(String ingredientName){
         this.ingredientName = ingredientName;
@@ -42,8 +42,4 @@ public class Ingredient {
         return this.ingredientName.equalsIgnoreCase(i.getIngredientName());
     }
 
-    public String[] toArray(){
-        String[] array = new String[] {StringUtils.center(Integer.toString(this.ingredientId), 15), StringUtils.center(this.ingredientName,15)};
-        return array;
-    }
 }

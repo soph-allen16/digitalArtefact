@@ -26,7 +26,7 @@ public class EditMealMenu {
                     4: Edit meal
                     5: Delete meal
                     6: Return
-                    Please select (1-5)
+                    Please select (1-6)
                     """);
 
             int choice = inputHelper.getIntegerInput();

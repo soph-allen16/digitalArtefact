@@ -68,10 +68,6 @@ public class Meal {
         Meal m = (Meal) obj;
         return this.mealName.equalsIgnoreCase(m.getMealName());
     }
-    public String[] toArray(){
-        String[] array = new String[] {StringUtils.center(Integer.toString(this.mealId), 15), StringUtils.center(this.mealName,15) , StringUtils.center(this.mealType,15) };
-        return array;
-    }
 
     @Override
     public String toString(){

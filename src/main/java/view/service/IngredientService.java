@@ -15,17 +15,13 @@ public class IngredientService {
     private final TableHelper tableHelper;
 
     public IngredientService(InputHelper inputHelper){
-        this.tableHelper = new TableHelper( new String[] {"ID", "Name"} );
+        this.tableHelper = new TableHelper();
         this.inputHelper = inputHelper;
         this.ingredientRepository = new IngredientRepository(this.inputHelper);
     }
 
     public void viewIngredientList(){
-        System.out.println(StringUtils.center("***** Ingredients *****", 49));
-        //tableHelper.printIngredients(ingredientRepository.getAllIngredients());
-        for(Ingredient i : ingredientRepository.getAllIngredients()){
-            System.out.println(i.getIngredientId() + " "+ i.getIngredientName());
-        }
+        tableHelper.printTable(tableHelper.createIngredientTableFromList(ingredientRepository.getAllIngredients()), new String[] {"ID", "Name"}, "Ingredients" );
     }
 
 

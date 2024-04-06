@@ -3,7 +3,6 @@ package view.service;
 import model.entity.Ingredient;
 import model.entity.Meal;
 import model.repository.MealRepository;
-import org.apache.commons.lang3.StringUtils;
 import utils.InputHelper;
 import utils.TableHelper;
 
@@ -19,15 +18,14 @@ public class MealService {
 
     public MealService(InputHelper inputHelper, IngredientService ingredientService){
         this.ingredientService = ingredientService;
-        this.tableHelper = new TableHelper(new String[] {"ID", "Name", "Type"});
+        this.tableHelper = new TableHelper();
         this.inputHelper = inputHelper;
         this.mealRepository = new MealRepository(this.inputHelper);
     }
 
     //view list
     public void viewMealList(){
-        System.out.println(StringUtils.center("***** Meals *****", 49));
-        tableHelper.printMeals(mealRepository.getAllMeals());
+        tableHelper.printTable( tableHelper.createMealTableFromList(mealRepository.getAllMeals()), new String[] {"ID", " Name"}, "Meals" );
     }
 
     //view single

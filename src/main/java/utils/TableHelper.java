@@ -3,50 +3,59 @@ package utils;
 import model.entity.Ingredient;
 import model.entity.Meal;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.*;
+import org.apache.commons.text.TextStringBuilder;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class TableHelper {
+    private final int tableWidth = 60;
 
-    private String[] headers;
-    private int width;
+    public void printTable(String[][] table, String[] headers, String title) {
+        int numberOfColumns = headers.length;
+         int columnWidth = tableWidth/numberOfColumns;
 
-    public TableHelper(String[] headers){
-        this.headers = headers;
-        this.width = headers.length;
-    }
+        String[] headerArray = Arrays.stream(headers).map(String::trim).toArray(String[]::new);
+        String format = formatBuilder(numberOfColumns);
 
-    //Remove if not necessary?
-    public TableHelper(){
+        System.out.println(StringUtils.center("***** "+ title +" *****", tableWidth + numberOfColumns + 1 ));
+        System.out.format(format, headerArray);
+        System.out.println(dividerBuilder(numberOfColumns));
 
-    }
-
-    public void printIngredients(List<Ingredient> ingredientList){
-        String[][] table =  ingredientList.stream().map(Ingredient::toArray).toArray(String[][]::new);
-        headers = Arrays.stream(headers).map(s -> StringUtils.center(s, 15)).toArray(String[] ::new);
-
-        System.out.format("|%-15s|%-15s|%-15s|%n",headers);
-        System.out.println("_________________________________________________");
-        for( String[] row : table){
-            System.out.format("|%-15s|%-15s|%-15s|%n", row);
+        for (String[] row : table) {
+            System.out.format(format, row);
         }
     }
 
-    public void printMeals(List<Meal> mealList){
-        String[][] table =  mealList.stream().map(Meal::toArray).toArray(String[][]::new);
-        headers = Arrays.stream(headers).map(s -> StringUtils.center(s, 15)).toArray(String[] ::new);
+    public String[][] createIngredientTableFromList(List<Ingredient> ingredientList) {
+        return ingredientList.stream().map( i -> new String[] { Integer.toString( i.getIngredientId() ) , i.getIngredientName()}).toArray(String[][]::new);
+    }
 
-        System.out.format("|%-15s|%-15s|%-15s|%n",headers);
-        System.out.println("_________________________________________________");
-        for( String[] row : table){
-            System.out.format("|%-15s|%-15s|%-15s|%n", row);
+    public String[][] createMealTableFromList(List<Meal> mealList) {
+        return mealList.stream().map( m -> new String[] { Integer.toString( m.getMealId() ), m.getMealName() } ).toArray(String[][]::new);
+    }
+
+    private String formatBuilder(int numberOfColumns) {
+        int columnWidth = tableWidth / numberOfColumns;
+        TextStringBuilder str = new TextStringBuilder();
+        str.append("|");
+        for (int i = 0; i < numberOfColumns; i++) {
+            str.append("%-" + columnWidth + "s|");
         }
+        str.append("%n");
+        return str.build();
     }
 
-    public void setHeaders(String[] headers) {
-        this.headers = headers;
-        this.width = headers.length;
+    private String dividerBuilder(int numberOfColumns) {
+        TextStringBuilder str = new TextStringBuilder();
+        str.append(new String(new char[60]).replace("\0", "_") );
+
+        for(int i=0; i<=numberOfColumns;i++){
+            str.append("_");
+        }
+        return str.build();
     }
+
+
 }
-
