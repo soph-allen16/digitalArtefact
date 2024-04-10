@@ -2,6 +2,7 @@ package model.entity;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
+import org.apache.commons.text.TextStringBuilder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,20 +10,18 @@ import java.util.List;
 public class Meal {
     private int mealId;
     private String mealName;
-    private String mealType;
     private HashMap<Ingredient, Integer> ingredients;
 
-    public Meal(String mealName, String mealType){
+    public Meal(String mealName){
         this.mealName = mealName;
-        this.mealType = mealType;
     }
-    public Meal(int mealId, String mealName, String mealType){
-        this(mealName,mealType);
+    public Meal(int mealId, String mealName){
+        this(mealName);
         this.mealId = mealId;
     }
 
-    public Meal(int mealId, String mealName, String mealType, HashMap<Ingredient, Integer> ingredients){
-        this(mealId, mealName, mealType);
+    public Meal(int mealId, String mealName, HashMap<Ingredient, Integer> ingredients){
+        this(mealId, mealName);
         this.ingredients = ingredients;
     }
 
@@ -40,14 +39,6 @@ public class Meal {
 
     public void setMealName(String mealName) {
         this.mealName = mealName;
-    }
-
-    public String getMealType() {
-        return mealType;
-    }
-
-    public void setMealType(String mealType) {
-        this.mealType = mealType;
     }
 
     public HashMap<Ingredient, Integer> getIngredients() {
@@ -71,16 +62,21 @@ public class Meal {
 
     @Override
     public String toString(){
-        StrBuilder str = new StrBuilder();
+        TextStringBuilder str = new TextStringBuilder();
         str.append("Name: ").append(this.mealName);
-        str.appendNewLine();
-        str.append("Type: ").append(this.mealType);
         str.appendNewLine();
         str.append("Ingredients:");
 
-        for( Ingredient i : ingredients.keySet() ){
+//        for( Ingredient i : ingredients.keySet() ){
+//            str.appendNewLine();
+//            str.append( ingredients.get(i) ).append(" x ").append(i.getIngredientName());
+//        }
+        for( Ingredient i : this.ingredients.keySet() ){
             str.appendNewLine();
-            str.append( ingredients.get(i) ).append(" x ").append(i.getIngredientName());
+            str.append("(Id: ")
+                    .append(String.valueOf(i.getIngredientId())).append(") ").append(i.getIngredientName())
+                    .append(" x ")
+                    .append(String.valueOf(this.ingredients.get(i))).append(" ").append(i.getUnit());
         }
 
         return str.build();

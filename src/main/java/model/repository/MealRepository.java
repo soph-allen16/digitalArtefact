@@ -23,8 +23,8 @@ public class MealRepository {
         return this.mealList;
     }
 
-    public void addMeal(String mealName, String mealType, HashMap<Ingredient, Integer> ingredients){
-        Meal meal = new Meal(counter , mealName, mealType, ingredients);
+    public void addMeal(String mealName, HashMap<Ingredient, Integer> ingredients){
+        Meal meal = new Meal(counter , mealName, ingredients);
         if( mealList.contains(meal) ){
             System.out.println("This meal already exists!");
         }else{

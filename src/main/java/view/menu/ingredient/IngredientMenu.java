@@ -3,14 +3,14 @@ package view.menu.ingredient;
 import utils.InputHelper;
 import view.service.IngredientService;
 
-public class EditIngredientMenu {
+public class IngredientMenu {
 
     private final IngredientService ingredientService;
     private final InputHelper inputHelper;
 
 
 
-    public EditIngredientMenu(InputHelper inputHelper, IngredientService ingredientService){
+    public IngredientMenu(InputHelper inputHelper, IngredientService ingredientService){
         this.inputHelper = inputHelper;
         this.ingredientService = ingredientService;
 

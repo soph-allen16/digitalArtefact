@@ -15,8 +15,24 @@ public class InputHelper {
     }
 
     public int getIntegerInput(){
-        int input = scanner.nextInt();
+        int input = -1;
+
+        try {
+            input = scanner.nextInt();
+        }catch (Exception ignored){}
+
         scanner.nextLine();
+
+        return input;
+    }
+
+    public int getPositiveIntegerInput(String prompt){
+        int input = getIntegerInput(prompt);
+
+        while (input<0){
+            System.out.println( "Please enter a positive integer!" );
+            input = getIntegerInput("Try again");
+        }
         return input;
     }
 

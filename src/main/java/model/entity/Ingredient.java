@@ -6,6 +6,8 @@ public class Ingredient {
     private int ingredientId;
     private String ingredientName;
 
+    private String unit;
+
     public Ingredient(String ingredientName){
         this.ingredientName = ingredientName;
     }
@@ -13,6 +15,19 @@ public class Ingredient {
     public Ingredient(String ingredientName, int ingredientId){
         this(ingredientName);
         this.ingredientId = ingredientId;
+    }
+
+    public Ingredient(String ingredientName, int ingredientId, String unit){
+        this(ingredientName,ingredientId);
+        this.unit = unit;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public String getIngredientName() {

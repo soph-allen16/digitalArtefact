@@ -20,6 +20,17 @@ public class IngredientRepository {
         return this.ingredientList;
     }
 
+
+    public Ingredient addIngredient(String ingredientName, String unit){
+        Ingredient ingredient = addIngredient(ingredientName);
+
+        if(ingredient != null){
+            ingredient.setUnit(unit);
+        }
+
+        return ingredient;
+    }
+
     public Ingredient addIngredient(String ingredientName){
         Ingredient ingredient = new Ingredient(ingredientName, counter);
 
@@ -65,7 +76,9 @@ public class IngredientRepository {
         //null if ingredient doesn't already exist - can't be found
         Ingredient alreadyExists = findIngredientByName(newName);
 
-        if( (alreadyExists != null) && (ingredient.getIngredientId() != alreadyExists.getIngredientId()) ){
+        if(ingredient == null ){
+            System.out.println("This operation cannot be performed: Ingredient with the id: " + id + " does not exist.");
+        }else if( (alreadyExists != null) && (ingredient.getIngredientId() != alreadyExists.getIngredientId()) ){
             System.out.println("This operation cannot be performed: ingredient with this name already exists");
         }else if( ! newName.isBlank() ) {
             ingredient.setIngredientName(newName);
