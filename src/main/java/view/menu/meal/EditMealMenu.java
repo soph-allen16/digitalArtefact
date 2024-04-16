@@ -2,8 +2,6 @@ package view.menu.meal;
 
 import model.entity.Ingredient;
 import model.entity.Meal;
-import org.apache.commons.lang3.text.StrBuilder;
-import org.apache.commons.text.TextStringBuilder;
 import utils.InputHelper;
 import view.service.MealService;
 
@@ -31,7 +29,7 @@ public class EditMealMenu{
         boolean tryAgain = true;
 
         do{
-            printMeal();
+ //           printMeal();
 
             System.out.println("""
                     \r\n
@@ -59,19 +57,19 @@ public class EditMealMenu{
         }while(tryAgain);
     }
 
-    private void printMeal(){
-        TextStringBuilder str = new TextStringBuilder();
-        str.append("Name: ").append(this.mealName);
-        str.appendNewLine();
-        str.append("Ingredients:");
-
-        for( Ingredient i : this.ingredients.keySet() ){
-            str.appendNewLine();
-            str.append("(Id: ")
-                    .append(String.valueOf(i.getIngredientId())).append(") ").append(i.getIngredientName())
-                    .append(" x ")
-                    .append(String.valueOf(this.ingredients.get(i))).append(" ").append(i.getUnit());
-        }
-        System.out.println(str.build());
-    }
+//    private void printMeal(){
+//        TextStringBuilder str = new TextStringBuilder();
+//        str.append("Name: ").append(this.mealName);
+//        str.appendNewLine();
+//        str.append("Ingredients:");
+//
+//        for( Ingredient i : this.ingredients.keySet() ){
+//            str.appendNewLine();
+//            str.append("(Id: ")
+//                    .append(String.valueOf(i.getIngredientId())).append(") ").append(i.getIngredientName())
+//                    .append(" x ")
+//                    .append(String.valueOf(this.ingredients.get(i))).append(" ").append(i.getUnit());
+//        }
+//        System.out.println(str.build());
+//    }
 }

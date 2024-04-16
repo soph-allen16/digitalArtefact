@@ -1,18 +1,25 @@
 package view.menu.ingredient;
 
 import utils.InputHelper;
+import view.menu.Menu;
 import view.service.IngredientService;
 
-public class IngredientMenu {
-
+public class IngredientMenu extends Menu {
     private final IngredientService ingredientService;
-    private final InputHelper inputHelper;
-
-
 
     public IngredientMenu(InputHelper inputHelper, IngredientService ingredientService){
-        this.inputHelper = inputHelper;
+        super(inputHelper);
         this.ingredientService = ingredientService;
+
+        menuName = "View/Edit Ingredients";
+
+        String[] list = {
+                "View ingredients list",
+                "Add ingredient",
+                "Edit ingredient",
+                "Delete ingredient",
+                "Return"
+        };
 
     }
 
