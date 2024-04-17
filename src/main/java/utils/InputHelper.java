@@ -19,7 +19,9 @@ public class InputHelper {
 
         try {
             input = scanner.nextInt();
-        }catch (Exception ignored){}
+        }catch (Exception ignored){
+            System.out.println("Incorrect input. Please enter an integer.");
+        }
 
         scanner.nextLine();
 
@@ -32,6 +34,22 @@ public class InputHelper {
         while (input<0){
             System.out.println( "Please enter a positive integer!" );
             input = getIntegerInput("Try again");
+        }
+        return input;
+    }
+
+    public int getmenuInput(int size){
+        boolean valid = false;
+        int input = getIntegerInput();
+
+        while (!valid){
+            if( (input < 1) || (input > size)){
+                System.out.println( "Input must be a positive integer between 1 and " + size + ". Please try again:");
+                valid = false;
+                input = getIntegerInput();
+            }else{
+                valid = true;
+            }
         }
         return input;
     }

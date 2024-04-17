@@ -13,33 +13,31 @@ public class MainMenu extends Menu {
                     MealService mealService) {
         super(inputHelper);
 
+        //Initialise dependencies
         this.ingredientService = ingredientService;
         this.mealService = mealService;
         this.editMenu = new EditMenu(inputHelper, ingredientService, mealService);
 
+        //Set menu information
         menuName = "Main Menu";
-        options = new String[]{"View/Edit Ingredients & Meals", "Meal Planning"};
+        options = new String[]{
+                "View/Edit Ingredients & Meals",
+                "Meal Planning" };
 
-
+        //Run the main menu - begin process
         runMenu();
     }
 
     @Override
-    protected void runMenu(){
-
+    public void runMenu(){
+        super.runMenu();
         while(tryAgain) {
-            super.runMenu();
-
             if (choice == 1) {
                 editMenu.runMenu();
-            } else if (choice == 2) {
+            }else if (choice == 2) {
                 ingredientService.viewIngredientList();
-            } else {
-                System.out.println("incorrect input. Please try again");
             }
+            super.runMenu();
         }
-
-        // Implemented inheritance -- else is always reached -- implement try-catch instead???
     }
-
 }

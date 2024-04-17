@@ -1,7 +1,6 @@
 package view.menu;
 
 import utils.InputHelper;
-import java.util.HashMap;
 
 public class Menu {
 
@@ -15,7 +14,7 @@ public class Menu {
         this.inputHelper = inputHelper;
     }
 
-    protected void runMenu(){
+    public void runMenu(){
         StringBuilder str = new StringBuilder();
 
         str.append("\r\n***** ").append(menuName).append(" *****\r\n");
@@ -23,13 +22,12 @@ public class Menu {
         for( int i = 0 ; i < options.length; i++ ){
             str.append( i+1 ).append(" : " ).append( options[i] ).append("\r\n");
         }
+
         str.append( options.length + 1 ).append(" : " ).append( "Return" ).append("\r\n");
-
         str.append("Please select: (1-").append(options.length + 1).append(")");
-
         System.out.println(str.toString());
 
-        choice = inputHelper.getIntegerInput();
+        choice = inputHelper.getmenuInput(options.length + 1);
 
         if(choice == options.length + 1){
             tryAgain = false;

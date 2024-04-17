@@ -14,29 +14,29 @@ public class EditMenu extends Menu {
                     IngredientService ingredientService,
                     MealService mealService){
         super(inputHelper);
+
         //Initialise Dependencies
         this.ingredientMenu = new IngredientMenu(inputHelper, ingredientService);
         this.mealMenu = new MealMenu(inputHelper, mealService);
 
         //Initialise menu-specific fields
         menuName = "Edit Ingredients/ Meals";
-        options = new String[] {"View/Edit Ingredients","View/Edit Meals"};
+        options = new String[] {
+                "View/Edit Ingredients",
+                "View/Edit Meals" };
 
     }
 
     @Override
     public void runMenu(){
+        super.runMenu();
         while(tryAgain){
-            super.runMenu();
-
             if(choice == 1){
                 ingredientMenu.runMenu();
-            }if(choice == 2){
+            }else if(choice == 2){
                 mealMenu.runMenu();
-            }else{
-                System.out.println("Incorrect input. Please try again.");
             }
-
+            super.runMenu();
         }
     }
 }

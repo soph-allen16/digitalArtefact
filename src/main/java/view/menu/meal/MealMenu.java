@@ -1,52 +1,45 @@
 package view.menu.meal;
 
 import utils.InputHelper;
+import view.menu.Menu;
 import view.service.MealService;
 
-public class MealMenu {
+public class MealMenu extends Menu {
 
     private final MealService mealService;
-    private final InputHelper inputHelper;
     private final EditMealMenu editMealMenu;
 
     public MealMenu(InputHelper inputHelper, MealService mealService){
-        this.inputHelper = inputHelper;
+        super(inputHelper);
+
+        //Initialise dependencies
         this.mealService = mealService;
         this.editMealMenu = new EditMealMenu(inputHelper, mealService);
+
+        //Set menu information
+        menuName = "View/Edit Ingredients";
+        options = new String[] {
+                "View list of meals",
+                "View meal details",
+                "Add meal",
+                "Edit meal",
+                "Delete meal" };
     }
 
+    @Override
     public void runMenu(){
-        boolean tryAgain = true;
-
-        do{
-            System.out.println("""
-                    \r\n
-                    ***** View/Edit Ingredients *****
-                    1: View list of meals
-                    2: View meal details
-                    3: Add meal
-                    4: Edit meal
-                    5: Delete meal
-                    6: Return
-                    Please select (1-6)
-                    """);
-
-            int choice = inputHelper.getIntegerInput();
-
+        super.runMenu();
+        while(tryAgain){
             if(choice == 1){
                 mealService.viewMealList();
-            } else if (choice == 2) {
+            }else if (choice == 2) {
                 mealService.viewMealDetails(inputHelper.getIntegerInput("Enter a meal ID"));
             }else if(choice == 3) {
                 mealService.addMeal();
-            }else if ( choice == 4){
-                editMealMenu.runMenu( mealService.findMealById() );
-            }else if (choice == 5){
-                tryAgain = false;
-            }else{
-                System.out.println("Incorrect input, please try again.");
+            }else if ( choice == 4) {
+                editMealMenu.runMenu(mealService.findMealById());
             }
-        }while( tryAgain );
+            super.runMenu();
+        }
     }
-
 }
