@@ -3,19 +3,24 @@ package view.menu.meal;
 import model.entity.Ingredient;
 import model.entity.Meal;
 import utils.InputHelper;
+import view.menu.Menu;
 import view.service.MealService;
-
 import java.util.HashMap;
 
-public class EditMealMenu{
+public class EditMealMenu extends Menu {
     private final MealService mealService;
-    private final InputHelper inputHelper;
     private String mealName;
     private HashMap<Ingredient, Integer> ingredients;
 
-    public EditMealMenu(InputHelper inputHelper, MealService mealService){
-        this.inputHelper = inputHelper;
+    public EditMealMenu(InputHelper inputHelper, MealService mealService) {
+        super(inputHelper);
         this.mealService = mealService;
+
+        menuName = "Edit meal";
+        options = new String[] {
+                "Edit meal name",
+                "Edit ingredients",
+                "Save changes" };
     }
     public void runMenu(Meal meal){
         if(meal == null){
@@ -26,50 +31,41 @@ public class EditMealMenu{
         this.mealName = meal.getMealName();
         this.ingredients = meal.getIngredients();
 
-        boolean tryAgain = true;
-
-        do{
- //           printMeal();
-
-            System.out.println("""
-                    \r\n
-                    ***** Edit meal *****
-                    1: Edit meal name
-                    2: Edit ingredients
-                    3: Save
-                    4: Cancel
-                    Please select (1-4)
-                    """);
-            int input = inputHelper.getIntegerInput();
-
-            if(input == 1){
+        printMeal();
+        super.runMenu();
+        while (tryAgain){
+            if(choice == 1){
                 this.mealName = inputHelper.getStringInput("Enter a new name for this meal");
-            }else if(input == 2){
-
-            }else if( input == 3){
-
-            }else if( input == 4){
+            }else if(choice == 2){
+                System.out.println("This is not possible.");
+            }else if( choice == 3){
+                mealService.editMealName(meal.getMealId(), mealName);
                 tryAgain = false;
-            }else{
-
             }
+            printMeal();
+            super.runMenu();
+        }
+}
 
-        }while(tryAgain);
+    private void printMeal(){
+        StringBuilder str = new StringBuilder();
+        str.append("\r\nName: ").append(this.mealName);
+        str.append("\r\nIngredients:");
+
+        for( Ingredient i : this.ingredients.keySet() ){
+            str.append("\r\n(Id: ")
+                    .append(i.getIngredientId()).append(") ").append(i.getIngredientName())
+                    .append(" x ")
+                    .append(this.ingredients.get(i)).append(" ").append(i.getUnit());
+        }
+        System.out.println(str.toString());
     }
 
-//    private void printMeal(){
-//        TextStringBuilder str = new TextStringBuilder();
-//        str.append("Name: ").append(this.mealName);
-//        str.appendNewLine();
-//        str.append("Ingredients:");
-//
-//        for( Ingredient i : this.ingredients.keySet() ){
-//            str.appendNewLine();
-//            str.append("(Id: ")
-//                    .append(String.valueOf(i.getIngredientId())).append(") ").append(i.getIngredientName())
-//                    .append(" x ")
-//                    .append(String.valueOf(this.ingredients.get(i))).append(" ").append(i.getUnit());
+//    private void changeIngredients(int id){
+//        if( this.ingredients.keySet().contains(id) ){
+//            String name = inputHelper.getStringInput("Please enter   ")
+//        }else{
+//            System.out.println("No ingredient with id: "+ id + " in the list.");
 //        }
-//        System.out.println(str.build());
 //    }
 }

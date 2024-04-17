@@ -23,8 +23,8 @@ public class EditMenu extends Menu {
         menuName = "Edit Ingredients/ Meals";
         options = new String[] {
                 "View/Edit Ingredients",
-                "View/Edit Meals" };
-
+                "View/Edit Meals"
+        };
     }
 
     @Override
