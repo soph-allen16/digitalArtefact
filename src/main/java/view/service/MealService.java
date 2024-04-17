@@ -91,10 +91,15 @@ public class MealService {
         mealRepository.addMeal(name, ingredients);
     }
 
-    //find by id ????
+    //find by id
+    public Meal findMealById(){
+        int id = inputHelper.getIntegerInput("Please enter the ID of a meal");
+        return mealRepository.findMealById(id);
+    }
+
 
     //update meal
-    public void editMealMenu(){
-
+    public void editMealName(int id, String newName){
+        mealRepository.editMealName(id, newName);
     }
 }

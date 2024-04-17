@@ -67,10 +67,6 @@ public class Meal {
         str.appendNewLine();
         str.append("Ingredients:");
 
-//        for( Ingredient i : ingredients.keySet() ){
-//            str.appendNewLine();
-//            str.append( ingredients.get(i) ).append(" x ").append(i.getIngredientName());
-//        }
         for( Ingredient i : this.ingredients.keySet() ){
             str.appendNewLine();
             str.append("(Id: ")

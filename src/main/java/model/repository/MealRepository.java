@@ -50,6 +50,27 @@ public class MealRepository {
         return null;
     }
 
-    //edit meal
+    public Meal findMealByName(String name){
+        for(Meal m : mealList){
+            if(m.getMealName().equalsIgnoreCase(name)){
+                return m;
+            }
+        }
+        return null;
+    }
 
+    //edit meal
+    public void editMealName(int id, String newName){
+        Meal meal = findMealById(id);
+
+        Meal alreadyExists = findMealByName(newName);
+
+        if(meal == null){
+            System.out.println("Operation cannot be performed: Meal with this ID does not exist.");
+        }else if( (alreadyExists!=null) && (meal.getMealId() != alreadyExists.getMealId())){
+            System.out.println("Operation cannot be performed: meal with this name already exists!");
+        }else if(!newName.isBlank()){
+            meal.setMealName(newName);
+        }
+    }
 }

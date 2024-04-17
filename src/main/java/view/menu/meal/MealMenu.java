@@ -7,10 +7,12 @@ public class MealMenu {
 
     private final MealService mealService;
     private final InputHelper inputHelper;
+    private final EditMealMenu editMealMenu;
 
     public MealMenu(InputHelper inputHelper, MealService mealService){
         this.inputHelper = inputHelper;
         this.mealService = mealService;
+        this.editMealMenu = new EditMealMenu(inputHelper, mealService);
     }
 
     public void runMenu(){
@@ -38,7 +40,7 @@ public class MealMenu {
             }else if(choice == 3) {
                 mealService.addMeal();
             }else if ( choice == 4){
-
+                editMealMenu.runMenu( mealService.findMealById() );
             }else if (choice == 5){
                 tryAgain = false;
             }else{
