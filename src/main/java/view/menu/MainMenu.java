@@ -2,21 +2,23 @@ package view.menu;
 
 import utils.InputHelper;
 import view.service.IngredientService;
+import view.service.MealPlanService;
 import view.service.MealService;
 
 public class MainMenu extends Menu {
     private final EditMenu editMenu;
-    private final IngredientService ingredientService;
-    private final MealService mealService;
+    private final MealPlanningMenu mealPlanningMenu;
+
+
     public MainMenu(InputHelper inputHelper,
                     IngredientService ingredientService,
-                    MealService mealService) {
+                    MealService mealService,
+                    MealPlanService mealPlanService){
         super(inputHelper);
 
         //Initialise dependencies
-        this.ingredientService = ingredientService;
-        this.mealService = mealService;
         this.editMenu = new EditMenu(inputHelper, ingredientService, mealService);
+        this.mealPlanningMenu = new MealPlanningMenu(inputHelper, mealPlanService);
 
         //Set menu information
         menuName = "Main Menu";
@@ -35,7 +37,7 @@ public class MainMenu extends Menu {
             if (choice == 1) {
                 editMenu.runMenu();
             }else if (choice == 2) {
-                ingredientService.viewIngredientList();
+                mealPlanningMenu.runMenu();
             }
             super.runMenu();
         }

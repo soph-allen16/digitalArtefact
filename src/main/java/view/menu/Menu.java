@@ -1,7 +1,9 @@
 package view.menu;
 
 import utils.InputHelper;
-
+/*
+    Superclass providing shared menu functionality including printing out options.
+ */
 public class Menu {
 
     protected final InputHelper inputHelper;

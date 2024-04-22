@@ -38,23 +38,23 @@ public class TableHelper {
 
     private String formatBuilder(int numberOfColumns) {
         int columnWidth = tableWidth / numberOfColumns;
-        TextStringBuilder str = new TextStringBuilder();
+        StringBuilder str = new StringBuilder();
         str.append("|");
         for (int i = 0; i < numberOfColumns; i++) {
             str.append("%-" + columnWidth + "s|");
         }
         str.append("%n");
-        return str.build();
+        return str.toString();
     }
 
     private String dividerBuilder(int numberOfColumns) {
-        TextStringBuilder str = new TextStringBuilder();
+        StringBuilder str = new StringBuilder();
         str.append(new String(new char[60]).replace("\0", "_") );
 
         for(int i=0; i<=numberOfColumns;i++){
             str.append("_");
         }
-        return str.build();
+        return str.toString();
     }
 
 

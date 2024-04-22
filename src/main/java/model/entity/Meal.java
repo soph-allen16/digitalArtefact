@@ -1,11 +1,6 @@
 package model.entity;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.StrBuilder;
-import org.apache.commons.text.TextStringBuilder;
-
 import java.util.HashMap;
-import java.util.List;
 
 public class Meal {
     private int mealId;
@@ -62,19 +57,17 @@ public class Meal {
 
     @Override
     public String toString(){
-        TextStringBuilder str = new TextStringBuilder();
-        str.append("Name: ").append(this.mealName);
-        str.appendNewLine();
+        StringBuilder str = new StringBuilder();
+        str.append("Name: ").append(this.mealName).append("\r\n");
         str.append("Ingredients:");
 
         for( Ingredient i : this.ingredients.keySet() ){
-            str.appendNewLine();
-            str.append("(Id: ")
-                    .append(String.valueOf(i.getIngredientId())).append(") ").append(i.getIngredientName())
+            str.append("\r\n").append("(Id: ")
+                    .append(i.getIngredientId()).append(") ").append(i.getIngredientName())
                     .append(" x ")
-                    .append(String.valueOf(this.ingredients.get(i))).append(" ").append(i.getUnit());
+                    .append(this.ingredients.get(i)).append(" ").append(i.getUnit());
         }
 
-        return str.build();
+        return str.toString();
     }
 }
