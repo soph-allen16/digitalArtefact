@@ -1,7 +1,5 @@
 package model.entity;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class Ingredient {
     private int ingredientId;
     private String ingredientName;

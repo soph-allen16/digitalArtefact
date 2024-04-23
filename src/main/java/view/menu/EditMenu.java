@@ -10,14 +10,13 @@ public class EditMenu extends Menu {
     private final IngredientMenu ingredientMenu;
     private final MealMenu mealMenu;
 
-    public EditMenu(InputHelper inputHelper,
-                    IngredientService ingredientService,
+    public EditMenu(IngredientService ingredientService,
                     MealService mealService){
-        super(inputHelper);
+        super();
 
         //Initialise Dependencies
-        this.ingredientMenu = new IngredientMenu(inputHelper, ingredientService);
-        this.mealMenu = new MealMenu(inputHelper, mealService);
+        this.ingredientMenu = new IngredientMenu( ingredientService);
+        this.mealMenu = new MealMenu( mealService);
 
         //Initialise menu-specific fields
         menuName = "Edit Ingredients/ Meals";

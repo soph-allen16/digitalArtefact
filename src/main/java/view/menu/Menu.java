@@ -5,15 +5,12 @@ import utils.InputHelper;
     Superclass providing shared menu functionality including printing out options.
  */
 public class Menu {
-
-    protected final InputHelper inputHelper;
     protected String[] options;
     protected boolean tryAgain = true;
     protected String menuName;
     protected int choice;
 
-    public Menu(InputHelper inputHelper){
-        this.inputHelper = inputHelper;
+    public Menu(){
     }
 
     public void runMenu(){
@@ -29,7 +26,7 @@ public class Menu {
         str.append("Please select: (1-").append(options.length + 1).append(")");
         System.out.println(str.toString());
 
-        choice = inputHelper.getmenuInput(options.length + 1);
+        choice = InputHelper.getMenuInput(options.length + 1);
 
         if(choice == options.length + 1){
             tryAgain = false;

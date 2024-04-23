@@ -8,20 +8,22 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MealPlan {
-    private HashMap<Integer, Meal> mealPlan;
+    private HashMap<String, Meal> mealPlan;
+    private String date;
     private int mealPlanId;
     Calendar calendar = Calendar.getInstance();
 
-    public MealPlan(HashMap<Integer,Meal> mealPlan, int mealPlanId, String date) {
+    public MealPlan(HashMap<String,Meal> mealPlan, String date, int mealPlanId) {
         this.mealPlan = mealPlan;
         this.mealPlanId = mealPlanId;
+        this.date = date;
     }
 
-    public HashMap<Integer, Meal> getMealPlan() {
+    public HashMap<String, Meal> getMealPlan() {
         return mealPlan;
     }
 
-    public void setMealPlan(HashMap<Integer, Meal> mealPlan) {
+    public void setMealPlan(HashMap<String, Meal> mealPlan) {
         this.mealPlan = mealPlan;
     }
 }

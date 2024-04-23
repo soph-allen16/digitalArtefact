@@ -12,8 +12,8 @@ public class EditMealMenu extends Menu {
     private String mealName;
     private HashMap<Ingredient, Integer> ingredients;
 
-    public EditMealMenu(InputHelper inputHelper, MealService mealService) {
-        super(inputHelper);
+    public EditMealMenu(MealService mealService) {
+        super();
         this.mealService = mealService;
 
         menuName = "Edit meal";
@@ -35,7 +35,7 @@ public class EditMealMenu extends Menu {
         super.runMenu();
         while (tryAgain){
             if(choice == 1){
-                this.mealName = inputHelper.getStringInput("Enter a new name for this meal");
+                this.mealName = InputHelper.getStringInput("Enter a new name for this meal");
             }else if(choice == 2){
                 System.out.println("This is not possible.");
             }else if( choice == 3){

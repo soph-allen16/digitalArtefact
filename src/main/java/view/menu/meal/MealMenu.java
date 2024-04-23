@@ -9,12 +9,12 @@ public class MealMenu extends Menu {
     private final MealService mealService;
     private final EditMealMenu editMealMenu;
 
-    public MealMenu(InputHelper inputHelper, MealService mealService){
-        super(inputHelper);
+    public MealMenu(MealService mealService){
+        super();
 
         //Initialise dependencies
         this.mealService = mealService;
-        this.editMealMenu = new EditMealMenu(inputHelper, mealService);
+        this.editMealMenu = new EditMealMenu(mealService);
 
         //Set menu information
         menuName = "View/Edit Ingredients";
@@ -33,7 +33,7 @@ public class MealMenu extends Menu {
             if(choice == 1){
                 mealService.viewMealList();
             }else if (choice == 2) {
-                mealService.viewMealDetails(inputHelper.getIntegerInput("Enter a meal ID"));
+                mealService.viewMealDetails(InputHelper.getIntegerInput("Enter a meal ID"));
             }else if(choice == 3) {
                 mealService.addMeal();
             }else if ( choice == 4) {

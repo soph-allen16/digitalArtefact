@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientRepository {
-    private final InputHelper inputHelper;
     private final List<Ingredient> ingredientList;
 
     private int counter = 0;
 
-    public IngredientRepository(InputHelper inputHelper){
-        this.inputHelper = inputHelper;
+    public IngredientRepository(){
         ingredientList = new ArrayList<Ingredient>();
     }
 
@@ -20,6 +18,8 @@ public class IngredientRepository {
         return this.ingredientList;
     }
 
+
+    //TODO : COUNTER???
 
     public Ingredient addIngredient(String ingredientName, String unit){
         Ingredient ingredient = addIngredient(ingredientName);

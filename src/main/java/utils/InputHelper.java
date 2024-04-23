@@ -7,14 +7,14 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputHelper {
-    private final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public int getIntegerInput(String prompt){
+    public static int getIntegerInput(String prompt){
         System.out.println(prompt + ": ");
         return getIntegerInput();
     }
 
-    public int getIntegerInput(){
+    public static int getIntegerInput(){
         int input = -1;
 
         try {
@@ -28,7 +28,7 @@ public class InputHelper {
         return input;
     }
 
-    public int getPositiveIntegerInput(String prompt){
+    public static int getPositiveIntegerInput(String prompt){
         int input = getIntegerInput(prompt);
 
         while (input<0){
@@ -38,7 +38,7 @@ public class InputHelper {
         return input;
     }
 
-    public int getmenuInput(int size){
+    public static int getMenuInput(int size){
         boolean valid = false;
         int input = getIntegerInput();
 
@@ -54,11 +54,11 @@ public class InputHelper {
         return input;
     }
 
-    public String getStringInput(String prompt){
+    public static String getStringInput(String prompt){
         System.out.println(prompt + ": ");
         return getStringInput();
     }
-    public String getStringInput(){
+    public static String getStringInput(){
         String input = scanner.nextLine();
         if(input.isBlank()) {
             System.out.println("Input cannot be blank. Please try again.");
@@ -67,7 +67,7 @@ public class InputHelper {
         return input;
     }
 
-    public ArrayList<String> getListInput(){
+    public static ArrayList<String> getListInput(){
         ArrayList<String> list = new ArrayList<>();
         String line;
 
@@ -83,13 +83,13 @@ public class InputHelper {
         return list;
     }
 
-    public ArrayList<String> getCommaSeparatedInput(String prompt){
+    public static ArrayList<String> getCommaSeparatedInput(String prompt){
         String input = getStringInput(prompt);
         ArrayList<String> list = new ArrayList<>( Arrays.stream(input.split(",")).map(String::trim).toList()  );
         return list;
     }
 
-    public void closeScanner(){
+    public static void closeScanner(){
         scanner.close();
     }
 }

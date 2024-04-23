@@ -11,17 +11,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MealService {
-
-    private final InputHelper inputHelper;
     private final MealRepository mealRepository;
     private final TableHelper tableHelper;
     private final IngredientService ingredientService;
 
-    public MealService(InputHelper inputHelper, IngredientService ingredientService){
+    public MealService( IngredientService ingredientService){
         this.ingredientService = ingredientService;
         this.tableHelper = new TableHelper();
-        this.inputHelper = inputHelper;
-        this.mealRepository = new MealRepository(this.inputHelper);
+        this.mealRepository = new MealRepository();
     }
 
     //view list - prints all meals to the console
@@ -37,14 +34,14 @@ public class MealService {
 
     //delete
     public void deleteMealById(){
-        int id = inputHelper.getIntegerInput("Enter the ID of the meal you would like to delete");
+        int id = InputHelper.getIntegerInput("Enter the ID of the meal you would like to delete");
         Meal meal = mealRepository.findMealById(id);
 
         if( meal == null ){
             System.out.println("Meal with this ID could not be found.");
         }else{
             System.out.println("Delete " + meal.getMealName() + " ? Y/N ");
-            String input = inputHelper.getStringInput();
+            String input = InputHelper.getStringInput();
 
             if(input.equalsIgnoreCase("y")){
                 mealRepository.removeMeal(meal);
@@ -59,11 +56,11 @@ public class MealService {
     //add meal
     public void addMeal(){
         //Gather meal info
-        String name = inputHelper.getStringInput("Please enter a meal name");
-        String type = inputHelper.getStringInput("Please enter a type");
+        String name = InputHelper.getStringInput("Please enter a meal name");
+        String type = InputHelper.getStringInput("Please enter a type");
 
         // Get a list of the ingredients as strings
-        ArrayList<String> inputIngredients = inputHelper.getCommaSeparatedInput("Please enter ingredients separated by commas (Quantities to be added after)");
+        ArrayList<String> inputIngredients = InputHelper.getCommaSeparatedInput("Please enter ingredients separated by commas (Quantities to be added after)");
 
         HashMap<Ingredient, Integer> ingredients = new HashMap<>();
 
@@ -77,7 +74,7 @@ public class MealService {
             Ingredient ingredient;
             if( ingredientService.findIngredientByName(s)==null ){
                 //If the ingredient isn't already in the list, add it
-                ingredient = ingredientService.addIngredient(s, inputHelper.getStringInput("Please enter a unit for "  + s));
+                ingredient = ingredientService.addIngredient(s, InputHelper.getStringInput("Please enter a unit for "  + s));
             }else{
                 //If it is already in the list, get it
                 ingredient = ingredientService.findIngredientByName(s);
@@ -85,7 +82,7 @@ public class MealService {
 
             //Add to the quantity map the ingredient and the quantity the user enters
 
-            ingredients.put(ingredient, inputHelper.getPositiveIntegerInput( "Quantity of "+ ingredient.getIngredientName() + " ("+ingredient.getUnit()+") "));
+            ingredients.put(ingredient, InputHelper.getPositiveIntegerInput( "Quantity of "+ ingredient.getIngredientName() + " ("+ingredient.getUnit()+") "));
         }
 
         mealRepository.addMeal(name, ingredients);
@@ -93,8 +90,16 @@ public class MealService {
 
     //find by id
     public Meal findMealById(){
-        int id = inputHelper.getIntegerInput("Please enter the ID of a meal");
+        int id = InputHelper.getIntegerInput("Please enter the ID of a meal");
         return mealRepository.findMealById(id);
+    }
+
+    public Meal findMeal(String input){
+        if( mealRepository.findMealById( Integer.parseInt(input) ) != null){
+            return mealRepository.findMealById( Integer.parseInt(input) );
+        }else{
+            return mealRepository.findMealByName( input );
+        }
     }
 
 

@@ -7,8 +7,8 @@ import view.service.IngredientService;
 public class IngredientMenu extends Menu {
     private final IngredientService ingredientService;
 
-    public IngredientMenu(InputHelper inputHelper, IngredientService ingredientService){
-        super(inputHelper);
+    public IngredientMenu(IngredientService ingredientService){
+        super();
 
         //Initialise dependencies
         this.ingredientService = ingredientService;

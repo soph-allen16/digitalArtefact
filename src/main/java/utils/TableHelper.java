@@ -2,9 +2,6 @@ package utils;
 
 import model.entity.Ingredient;
 import model.entity.Meal;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.*;
-import org.apache.commons.text.TextStringBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +16,7 @@ public class TableHelper {
         String[] headerArray = Arrays.stream(headers).map(String::trim).toArray(String[]::new);
         String format = formatBuilder(numberOfColumns);
 
-        System.out.println(StringUtils.center("***** "+ title +" *****", tableWidth + numberOfColumns + 1 ));
+        //System.out.println(StringUtils.center("***** "+ title +" *****", tableWidth + numberOfColumns + 1 ));
         System.out.format(format, headerArray);
         System.out.println(dividerBuilder(numberOfColumns));
 

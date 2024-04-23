@@ -1,17 +1,13 @@
 package view.menu;
 
-import model.entity.MealPlan;
-import utils.InputHelper;
-import view.menu.mealPlan.AddNewMealPlan;
 import view.service.MealPlanService;
+import view.service.MealService;
 
 public class MealPlanningMenu extends Menu {
-    private final AddNewMealPlan addNewMealPlan;
     private final MealPlanService mealPlanService;
 
-    public MealPlanningMenu(InputHelper inputHelper, MealPlanService mealPlanService) {
-        super(inputHelper);
-        this.addNewMealPlan = new AddNewMealPlan(inputHelper);
+    public MealPlanningMenu(MealPlanService mealPlanService) {
+        super();
         this.mealPlanService = mealPlanService;
 
         menuName = "Meal Planning";
@@ -26,9 +22,9 @@ public class MealPlanningMenu extends Menu {
         super.runMenu();
         while(tryAgain){
             if(choice ==1){
-                addNewMealPlan.runMenu();
+                mealPlanService.addNewMeal();
             }else if(choice ==2){
-
+                //TODO : VIEW MEAL PLANS
             }
             super.runMenu();
         }

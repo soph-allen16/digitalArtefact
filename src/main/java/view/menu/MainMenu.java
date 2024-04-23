@@ -10,15 +10,14 @@ public class MainMenu extends Menu {
     private final MealPlanningMenu mealPlanningMenu;
 
 
-    public MainMenu(InputHelper inputHelper,
-                    IngredientService ingredientService,
+    public MainMenu(IngredientService ingredientService,
                     MealService mealService,
                     MealPlanService mealPlanService){
-        super(inputHelper);
+        super();
 
         //Initialise dependencies
-        this.editMenu = new EditMenu(inputHelper, ingredientService, mealService);
-        this.mealPlanningMenu = new MealPlanningMenu(inputHelper, mealPlanService);
+        this.editMenu = new EditMenu(ingredientService, mealService);
+        this.mealPlanningMenu = new MealPlanningMenu( mealPlanService);
 
         //Set menu information
         menuName = "Main Menu";

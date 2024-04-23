@@ -9,13 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MealRepository {
-
-    private final InputHelper inputHelper;
     private final List<Meal> mealList;
     private int counter = 0 ;
 
-    public MealRepository(InputHelper inputHelper){
-        this.inputHelper = inputHelper;
+    public MealRepository(){
         this.mealList = new ArrayList<Meal>();
     }
 
