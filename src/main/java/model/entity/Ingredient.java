@@ -54,11 +54,8 @@ public class Ingredient {
         return this.ingredientName.equalsIgnoreCase(i.getIngredientName());
     }
 
-    public String toCsvString(){
-        return ingredientId + "," + ingredientName + "," + unit;
-    }
-
+    @Override
     public String toString(){
-        return this.ingredientName;
+        return ingredientId + "," + ingredientName + "," + unit;
     }
 }

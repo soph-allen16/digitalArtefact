@@ -16,7 +16,7 @@ public class IngredientRepository {
 
     public IngredientRepository(){
         ingredientList = IngredientFileUtil.readIngredientsFromFile();
-        counter = ingredientList.stream().max(Comparator.comparing(Ingredient::getIngredientId)).orElseThrow(NoSuchElementException::new    );
+        counter = ingredientList.stream().max(Comparator.comparing(Ingredient::getIngredientId)).get().getIngredientId() + 1;
     }
 
     public List<Ingredient> getAllIngredients(){

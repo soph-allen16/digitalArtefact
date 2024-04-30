@@ -3,6 +3,8 @@ package model.repository;
 import model.entity.Ingredient;
 import model.entity.Meal;
 import utils.InputHelper;
+import utils.fileUtils.MealsFileUtil;
+import view.service.IngredientService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,8 +14,8 @@ public class MealRepository {
     private final List<Meal> mealList;
     private int counter = 0 ;
 
-    public MealRepository(){
-        this.mealList = new ArrayList<Meal>();
+    public MealRepository(IngredientService ingredientService){
+        mealList = MealsFileUtil.readMealsFromFile(ingredientService);
     }
 
     public List<Meal> getAllMeals(){

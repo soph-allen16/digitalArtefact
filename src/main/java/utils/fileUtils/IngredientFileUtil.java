@@ -4,7 +4,6 @@ import model.entity.Ingredient;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,33 +13,16 @@ import static constants.FileConstants.INGREDIENT_FILE;
 
 public class IngredientFileUtil {
 
-//    public static void writeIngredientToFile(Ingredient ingredient){
-//        File file = new File(INGREDIENT_FILE);
-//        file.getParentFile().mkdirs();
-//
-//        try{
-//            FileWriter fileWriter = new FileWriter(file, true);
-//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-//
-//            bufferedWriter.write(ingredient.toCsvString() + "\n");
-//
-//            bufferedWriter.close();
-//
-//        }catch(Exception e){
-//            System.err.println(e.getMessage());
-//        }
-//    }
-
     public static void saveIngredientsToFile(List<Ingredient> ingredients){
         File file = new File(INGREDIENT_FILE);
         file.getParentFile().mkdirs();
 
         try{
-            FileWriter fileWriter = new FileWriter(file, true);
+            FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
             for(Ingredient i : ingredients) {
-                bufferedWriter.write(i.toCsvString() + "\n");
+                bufferedWriter.write(i.toString() + "\n");
             }
 
             bufferedWriter.close();

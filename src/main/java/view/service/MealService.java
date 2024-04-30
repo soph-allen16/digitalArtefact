@@ -9,6 +9,7 @@ import utils.TableHelper;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MealService {
     private final MealRepository mealRepository;
@@ -18,7 +19,7 @@ public class MealService {
     public MealService( IngredientService ingredientService){
         this.ingredientService = ingredientService;
         this.tableHelper = new TableHelper();
-        this.mealRepository = new MealRepository();
+        this.mealRepository = new MealRepository(ingredientService);
     }
 
     //view list - prints all meals to the console
@@ -57,7 +58,6 @@ public class MealService {
     public void addMeal(){
         //Gather meal info
         String name = InputHelper.getStringInput("Please enter a meal name");
-        String type = InputHelper.getStringInput("Please enter a type");
 
         // Get a list of the ingredients as strings
         ArrayList<String> inputIngredients = InputHelper.getCommaSeparatedInput("Please enter ingredients separated by commas (Quantities to be added after)");
@@ -102,4 +102,7 @@ public class MealService {
         }
     }
 
+    public List<Meal> getMeals(){
+        return mealRepository.getAllMeals();
+    }
 }

@@ -70,4 +70,16 @@ public class Meal {
 
         return str.toString();
     }
+
+    public String toCSV(){
+        StringBuilder s = new StringBuilder();
+
+        s.append(mealId).append(",").append(mealName).append(",");
+
+        for(Ingredient i : ingredients.keySet()){
+            s.append(i.getIngredientName()).append(":").append(ingredients.get(i)).append(";");
+        }
+
+        return s.toString();
+    }
 }

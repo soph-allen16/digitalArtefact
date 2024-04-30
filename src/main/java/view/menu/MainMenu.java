@@ -24,8 +24,7 @@ public class MainMenu extends Menu {
         menuName = "Main Menu";
         options = new String[]{
                 "View/Edit Ingredients & Meals",
-                "Meal Planning",
-        "temp"};
+                "Meal Planning"};
 
         //Run the main menu - begin process
         runMenu();
@@ -39,10 +38,6 @@ public class MainMenu extends Menu {
                 editMenu.runMenu();
             }else if (choice == 2) {
                 mealPlanningMenu.runMenu();
-            }else if (choice ==3){
-                for( Ingredient i : IngredientFileUtil.readIngredientsFromFile()){
-                    System.out.println( i.toString() );
-                }
             }
             super.runMenu();
         }
