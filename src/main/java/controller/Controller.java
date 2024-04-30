@@ -1,5 +1,6 @@
 package controller;
 
+import utils.fileUtils.IngredientFileUtil;
 import view.menu.MainMenu;
 import view.service.IngredientService;
 import utils.InputHelper;
@@ -19,6 +20,7 @@ public class Controller {
         this.mealService = new MealService(ingredientService);
         this.mealPlanService = new MealPlanService(mealService);
         this.mainMenu = new MainMenu(ingredientService, mealService, mealPlanService);
+        IngredientFileUtil.saveIngredientsToFile(ingredientService.getIngredientsList());
         InputHelper.closeScanner();
     }
 

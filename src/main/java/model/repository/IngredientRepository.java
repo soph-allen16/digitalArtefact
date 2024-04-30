@@ -2,8 +2,12 @@ package model.repository;
 
 import utils.InputHelper;
 import model.entity.Ingredient;
+import utils.fileUtils.IngredientFileUtil;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class IngredientRepository {
     private final List<Ingredient> ingredientList;
@@ -11,7 +15,8 @@ public class IngredientRepository {
     private int counter = 0;
 
     public IngredientRepository(){
-        ingredientList = new ArrayList<Ingredient>();
+        ingredientList = IngredientFileUtil.readIngredientsFromFile();
+        counter = ingredientList.stream().max(Comparator.comparing(Ingredient::getIngredientId)).orElseThrow(NoSuchElementException::new    );
     }
 
     public List<Ingredient> getAllIngredients(){
@@ -30,7 +35,7 @@ public class IngredientRepository {
     }
 
     public Ingredient addIngredient(String ingredientName){
-        Ingredient ingredient = new Ingredient(ingredientName, counter);
+        Ingredient ingredient = new Ingredient(counter, ingredientName);
 
         if(ingredientList.contains(ingredient)){
             System.out.println("This ingredient is already in the list");
@@ -68,18 +73,18 @@ public class IngredientRepository {
         return null;
     }
 
-    public void updateIngredient(int id, String newName){
-        Ingredient ingredient = findIngredientById(id);
-
-        //null if ingredient doesn't already exist - can't be found
-        Ingredient alreadyExists = findIngredientByName(newName);
-
-        if(ingredient == null ){
-            System.out.println("This operation cannot be performed: Ingredient with the id: " + id + " does not exist.");
-        }else if( (alreadyExists != null) && (ingredient.getIngredientId() != alreadyExists.getIngredientId()) ){
-            System.out.println("This operation cannot be performed: ingredient with this name already exists");
-        }else if( ! newName.isBlank() ) {
-            ingredient.setIngredientName(newName);
-        }
-    }
+//    public void updateIngredient(int id, String newName){
+//        Ingredient ingredient = findIngredientById(id);
+//
+//        //null if ingredient doesn't already exist - can't be found
+//        Ingredient alreadyExists = findIngredientByName(newName);
+//
+//        if(ingredient == null ){
+//            System.out.println("This operation cannot be performed: Ingredient with the id: " + id + " does not exist.");
+//        }else if( (alreadyExists != null) && (ingredient.getIngredientId() != alreadyExists.getIngredientId()) ){
+//            System.out.println("This operation cannot be performed: ingredient with this name already exists");
+//        }else if( ! newName.isBlank() ) {
+//            ingredient.setIngredientName(newName);
+//        }
+//    }
 }

@@ -3,20 +3,19 @@ package model.entity;
 public class Ingredient {
     private int ingredientId;
     private String ingredientName;
-
     private String unit;
 
     public Ingredient(String ingredientName){
         this.ingredientName = ingredientName;
     }
 
-    public Ingredient(String ingredientName, int ingredientId){
+    public Ingredient(int ingredientId, String ingredientName){
         this(ingredientName);
         this.ingredientId = ingredientId;
     }
 
-    public Ingredient(String ingredientName, int ingredientId, String unit){
-        this(ingredientName,ingredientId);
+    public Ingredient(int ingredientId, String ingredientName,  String unit){
+        this(ingredientId, ingredientName);
         this.unit = unit;
     }
 
@@ -57,5 +56,9 @@ public class Ingredient {
 
     public String toCsvString(){
         return ingredientId + "," + ingredientName + "," + unit;
+    }
+
+    public String toString(){
+        return this.ingredientName;
     }
 }

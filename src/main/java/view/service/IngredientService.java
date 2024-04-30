@@ -6,6 +6,8 @@ import utils.InputHelper;
 import model.entity.Ingredient;
 import utils.TableHelper;
 
+import java.util.List;
+
 
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
@@ -18,6 +20,10 @@ public class IngredientService {
 
     public void viewIngredientList(){
         tableHelper.printTable(tableHelper.createIngredientTableFromList(ingredientRepository.getAllIngredients()), new String[] {"ID", "Name"}, "Ingredients" );
+    }
+
+    public List<Ingredient> getIngredientsList(){
+        return ingredientRepository.getAllIngredients();
     }
 
 
@@ -61,8 +67,8 @@ public class IngredientService {
         }
     }
 
-    public void editIngredient(){
-        int choice = InputHelper.getIntegerInput("Please enter the ID of the ingredient you would like to rename"   );
-        ingredientRepository.updateIngredient(choice, InputHelper.getStringInput("Enter a new name"));
-    }
+//    public void editIngredient(){
+//        int choice = InputHelper.getIntegerInput("Please enter the ID of the ingredient you would like to rename"   );
+//        ingredientRepository.updateIngredient(choice, InputHelper.getStringInput("Enter a new name"));
+//    }
 }

@@ -31,7 +31,7 @@ public class IngredientMenu extends Menu {
             } else if (choice == 2) {
                 ingredientService.addIngredient();
             }else if (choice ==3 ){
-                ingredientService.editIngredient();
+//                ingredientService.editIngredient();
             }else if(choice == 4) {
                 ingredientService.deleteIngredient();
             }
