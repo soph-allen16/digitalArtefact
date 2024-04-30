@@ -102,9 +102,4 @@ public class MealService {
         }
     }
 
-
-    //update meal
-    public void editMealName(int id, String newName){
-        mealRepository.editMealName(id, newName);
-    }
 }

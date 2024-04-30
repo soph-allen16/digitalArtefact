@@ -19,8 +19,6 @@ public class IngredientRepository {
     }
 
 
-    //TODO : COUNTER???
-
     public Ingredient addIngredient(String ingredientName, String unit){
         Ingredient ingredient = addIngredient(ingredientName);
 

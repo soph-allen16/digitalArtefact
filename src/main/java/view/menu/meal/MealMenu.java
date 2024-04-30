@@ -7,14 +7,12 @@ import view.service.MealService;
 public class MealMenu extends Menu {
 
     private final MealService mealService;
-    private final EditMealMenu editMealMenu;
 
     public MealMenu(MealService mealService){
         super();
 
         //Initialise dependencies
         this.mealService = mealService;
-        this.editMealMenu = new EditMealMenu(mealService);
 
         //Set menu information
         menuName = "View/Edit Ingredients";
@@ -22,7 +20,6 @@ public class MealMenu extends Menu {
                 "View list of meals",
                 "View meal details",
                 "Add meal",
-                "Edit meal",
                 "Delete meal" };
     }
 
@@ -37,7 +34,7 @@ public class MealMenu extends Menu {
             }else if(choice == 3) {
                 mealService.addMeal();
             }else if ( choice == 4) {
-                editMealMenu.runMenu(mealService.findMealById());
+                mealService.deleteMealById();
             }
             super.runMenu();
         }

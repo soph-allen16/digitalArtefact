@@ -18,7 +18,7 @@ public class IngredientMenu extends Menu {
         options = new String[] {
                 "View ingredients list",
                 "Add ingredient",
-                "Edit ingredient",
+                "Edit ingredient name",
                 "Delete ingredient" };
     }
 
@@ -30,9 +30,9 @@ public class IngredientMenu extends Menu {
                 ingredientService.viewIngredientList();
             } else if (choice == 2) {
                 ingredientService.addIngredient();
-            }else if(choice == 3) {
+            }else if (choice ==3 ){
                 ingredientService.editIngredient();
-            }else if (choice == 4){
+            }else if(choice == 4) {
                 ingredientService.deleteIngredient();
             }
             super.runMenu();
