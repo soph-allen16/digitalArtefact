@@ -1,6 +1,5 @@
 package view.menu.ingredient;
 
-import utils.InputHelper;
 import view.menu.Menu;
 import view.service.IngredientService;
 
@@ -15,7 +14,7 @@ public class IngredientMenu extends Menu {
 
         //Initialise menu items
         menuName = "View/Edit Ingredients";
-        options = new String[] {
+        menuOptions = new String[] {
                 "View ingredients list",
                 "Add ingredient",
                 "Edit ingredient name",
@@ -30,7 +29,7 @@ public class IngredientMenu extends Menu {
                 ingredientService.viewIngredientList();
             } else if (choice == 2) {
                 ingredientService.addIngredient();
-            }else if (choice ==3 ){
+            }else if (choice == 3 ){
 //                ingredientService.editIngredient();
             }else if(choice == 4) {
                 ingredientService.deleteIngredient();

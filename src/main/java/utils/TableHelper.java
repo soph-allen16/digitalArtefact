@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TableHelper {
-    private final int tableWidth = 60;
+    public final int tableWidth = 60;
 
     public void printTable(String[][] table, String[] headers, String title) {
         int numberOfColumns = headers.length;

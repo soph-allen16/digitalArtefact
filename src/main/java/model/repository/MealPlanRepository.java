@@ -6,6 +6,7 @@ import model.entity.MealPlan;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class MealPlanRepository {
@@ -18,7 +19,7 @@ public class MealPlanRepository {
     }
 
     //add meal plan
-    public void addMealPlan(HashMap<String, Meal> weeklyMeals, String date){
+    public void addMealPlan(LinkedHashMap<String, Meal> weeklyMeals, String date){
         MealPlan mealPlan = new MealPlan(weeklyMeals, date, counter);
 
         if(mealPlans.contains(mealPlan) ){
@@ -29,9 +30,15 @@ public class MealPlanRepository {
         }
     }
 
+    public MealPlan getMealPlanById(int id){
+        for(MealPlan m : mealPlans){
+            if(m.getMealPlanId() == id){
+                return m;
+            }
+        }
+        return null;
+    }
     //edit meal plan
 
     //delete meal plan
-
-    //get meal plan
 }

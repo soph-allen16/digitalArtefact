@@ -1,7 +1,6 @@
 package view.menu;
 
 import view.service.MealPlanService;
-import view.service.MealService;
 
 public class MealPlanningMenu extends Menu {
     private final MealPlanService mealPlanService;
@@ -11,7 +10,8 @@ public class MealPlanningMenu extends Menu {
         this.mealPlanService = mealPlanService;
 
         menuName = "Meal Planning";
-        options = new String[] {
+
+        menuOptions = new String[] {
                 "Add new meal plan",
                 "View meal plans"
         };
@@ -21,10 +21,10 @@ public class MealPlanningMenu extends Menu {
     public void runMenu(){
         super.runMenu();
         while(tryAgain){
-            if(choice ==1){
+            if(choice == 1){
                 mealPlanService.addNewMeal();
-            }else if(choice ==2){
-                //TODO : VIEW MEAL PLANS
+            }else if(choice == 2){
+                mealPlanService.viewMealPlan();
             }
             super.runMenu();
         }

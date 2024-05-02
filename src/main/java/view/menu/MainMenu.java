@@ -1,7 +1,5 @@
 package view.menu;
 
-import model.entity.Ingredient;
-import utils.fileUtils.IngredientFileUtil;
 import view.service.IngredientService;
 import view.service.MealPlanService;
 import view.service.MealService;
@@ -22,7 +20,7 @@ public class MainMenu extends Menu {
 
         //Set menu information
         menuName = "Main Menu";
-        options = new String[]{
+        menuOptions = new String[]{
                 "View/Edit Ingredients & Meals",
                 "Meal Planning"};
 

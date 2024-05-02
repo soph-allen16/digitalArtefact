@@ -16,7 +16,7 @@ public class MealMenu extends Menu {
 
         //Set menu information
         menuName = "View/Edit Ingredients";
-        options = new String[] {
+        menuOptions = new String[] {
                 "View list of meals",
                 "View meal details",
                 "Add meal",
