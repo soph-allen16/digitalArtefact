@@ -2,30 +2,21 @@ package model.entity;
 
 import java.util.HashMap;
 
+//Entity for storing meals and their ingredients with quantities
 public class Meal {
     private int mealId;
     private String mealName;
     private HashMap<Ingredient, Integer> ingredients;
 
-    public Meal(String mealName){
-        this.mealName = mealName;
-    }
-    public Meal(int mealId, String mealName){
-        this(mealName);
-        this.mealId = mealId;
-    }
-
     public Meal(int mealId, String mealName, HashMap<Ingredient, Integer> ingredients){
-        this(mealId, mealName);
+        this.mealName = mealName;
+        this.mealId = mealId;
         this.ingredients = ingredients;
     }
 
+    //getters and setters
     public int getMealId() {
         return mealId;
-    }
-
-    public void setMealId(int mealId) {
-        this.mealId = mealId;
     }
 
     public String getMealName() {
@@ -34,14 +25,6 @@ public class Meal {
 
     public void setMealName(String mealName) {
         this.mealName = mealName;
-    }
-
-    public HashMap<Ingredient, Integer> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(HashMap<Ingredient, Integer> ingredients) {
-        this.ingredients = ingredients;
     }
 
     @Override
@@ -72,6 +55,7 @@ public class Meal {
         return str.toString();
     }
 
+    //Create custom CSV method to store the hashmap properly
     public String toCSV(){
         StringBuilder s = new StringBuilder();
 

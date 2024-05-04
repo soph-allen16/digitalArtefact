@@ -1,8 +1,8 @@
-package view.menu.meal;
+package view.levelTwoMenu;
 
 import utils.InputHelper;
-import view.menu.Menu;
 import model.service.MealService;
+import view.Menu;
 
 public class MealMenu extends Menu {
 
@@ -28,12 +28,16 @@ public class MealMenu extends Menu {
         super.runMenu();
         while(tryAgain){
             if(choice == 1){
+                //View meal list
                 mealService.viewMealList();
             }else if (choice == 2) {
+                //View specific meal details
                 mealService.viewMealDetails(InputHelper.getIntegerInput("Enter a meal ID"));
             }else if(choice == 3) {
+                //Add new meal
                 mealService.addMeal();
             }else if ( choice == 4) {
+                //Delete meal
                 mealService.deleteMealById();
             }
             super.runMenu();

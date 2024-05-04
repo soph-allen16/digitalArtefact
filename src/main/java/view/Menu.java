@@ -1,4 +1,4 @@
-package view.menu;
+package view;
 
 import utils.InputHelper;
 import utils.OutputHelper;

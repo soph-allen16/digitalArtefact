@@ -1,7 +1,9 @@
 package model.entity;
 
+import utils.OutputHelper;
 import java.util.*;
 
+//Entity to store meal plans
 public class MealPlan {
 
     private int mealPlanId;
@@ -15,13 +17,6 @@ public class MealPlan {
     }
 
     //getters and setters
-    public HashMap<String, Meal> getMealPlan() {
-        return mealPlan;
-    }
-    public void setMealPlan(LinkedHashMap<String, Meal> mealPlan) {
-        this.mealPlan = mealPlan;
-    }
-
     public int getMealPlanId() {
         return mealPlanId;
     }
@@ -30,17 +25,18 @@ public class MealPlan {
         return name;
     }
 
+    //Override toString method for easy printing to console
     @Override
     public String toString(){
         StringBuilder str = new StringBuilder();
-        str.append("Meal Plan ID: ").append(mealPlanId).append("\r\n");
-        str.append("Meal Plan Name: ").append(name).append("\r\n\r\n");
+        str.append(OutputHelper.createTitle(mealPlanId + " : " + name));
         for(String day : mealPlan.keySet() ){
             str.append( day ).append(" : ").append(mealPlan.get(day).getMealName()).append("\r\n");
         }
         return str.toString();
     }
 
+    //Create CSV method to store the hashmap easily
     public String toCSV(){
         StringBuilder s = new StringBuilder();
 

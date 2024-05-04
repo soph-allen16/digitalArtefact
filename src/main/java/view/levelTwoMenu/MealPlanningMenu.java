@@ -1,6 +1,8 @@
-package view.menu;
+package view.levelTwoMenu;
 
 import model.service.MealPlanService;
+import utils.InputHelper;
+import view.Menu;
 
 public class MealPlanningMenu extends Menu {
     private final MealPlanService mealPlanService;
@@ -12,7 +14,8 @@ public class MealPlanningMenu extends Menu {
 
         menuOptions = new String[] {
                 "Add new meal plan",
-                "View meal plans"
+                "View list of meal plans",
+                "View meal plan details"
         };
     }
 
@@ -21,9 +24,14 @@ public class MealPlanningMenu extends Menu {
         super.runMenu();
         while(tryAgain){
             if(choice == 1){
+                //Add new meal plan
                 mealPlanService.addNewMealPlan();
             }else if(choice == 2){
+                //View list of meal plans
                 mealPlanService.viewMealPlanList();
+            }else if(choice == 3){
+                //View specific meal plan
+                mealPlanService.viewMealPlan();
             }
             super.runMenu();
         }

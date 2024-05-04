@@ -11,11 +11,8 @@ import utils.TableHelper;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/*
-    Class to handle user input and validation for the Meal Plan repository, and interface between repository and menus
-    Summary of methods: add meal plan, View meal plan, get list of meal plans
- */
-
+    //Class to handle user input and validation for the Meal Plan repository, and interface between repository and menus
+    //Summary of methods: add meal plan, View meal plan, get list of meal plans
 public class MealPlanService {
 
     private final MealService mealService;
@@ -79,4 +76,25 @@ public class MealPlanService {
     public List<MealPlan> getMealPlans(){
         return mealPlanRepository.getMealPlans();
     }
+
+    //Delete meal plan by ID
+        public void deleteMealPlanById(){
+        int id = InputHelper.getIntegerInput("Enter the ID of the meal plan to delete" );
+        MealPlan mealPlan = mealPlanRepository.getMealPlanById(id);
+
+        if(mealPlan==null){
+            System.out.println("Meal plan with this ID could not be found");
+        }else {
+            System.out.println("Delete this meal plan? Y/N");
+            String input = InputHelper.getStringInput();
+
+            if(input.equalsIgnoreCase("Y")){
+                mealPlanRepository.deleteMealPlan(mealPlan);
+            }else if(input.equalsIgnoreCase("n")){
+                System.out.println("Meal plan not deleted");
+            }else{
+                System.out.println("Incorrect input. Please try again");
+            }
+        }
+        }
 }

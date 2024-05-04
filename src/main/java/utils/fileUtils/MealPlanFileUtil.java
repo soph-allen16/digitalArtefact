@@ -14,10 +14,7 @@ import java.util.Scanner;
 
 import static constants.FileConstants.MEAL_PLAN_FILE;
 
-/*
-    Class to handle loading and saving of meal plans to csv-style file
- */
-
+//Class to handle loading and saving of meal plans to csv-style file
 public class MealPlanFileUtil {
 
     //save all meal plans to file on application ending
@@ -46,13 +43,11 @@ public class MealPlanFileUtil {
         if (!file.exists()){
             return mealPlans;
         }
-
         try{
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()){
                 mealPlans.add( getMealPlanFromRow(scanner.nextLine(), mealService) );
             }
-
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
@@ -78,17 +73,13 @@ public class MealPlanFileUtil {
             if (s.isBlank()) {
                 continue;
             }
-
             //Split using the colon to get day and meal values
             String[] mapValues = s.split(":");
-
             //Find meal by ID using service
             Meal meal = mealService.findMealById(Integer.parseInt(mapValues[1]));
-
             //Add the day and the meal back into the LinkedHashMap
             meals.put(mapValues[0], meal);
         }
-
         return new MealPlan(Integer.parseInt(rowValues[0]), rowValues[1], meals);
     }
 }

@@ -1,9 +1,11 @@
 package utils;
 
+//Helper class containing string utilities for printing to console
 public class OutputHelper {
 
-    public static final int titleSize = TableHelper.tableWidth+2;
+    public static final int titleSize = TableHelper.tableWidth+3;
 
+    //Prints a title surrounded by a box
     public static void printTitle(String string){
         System.out.println(createTitle(string));
     }
@@ -25,6 +27,7 @@ public class OutputHelper {
         return s.toString();
     }
 
+    //Creates a string of fixed length with a single repeated char
     public static String createCharString(char c, int size){
         return new String(new char[size]).replace("\0", String.valueOf(c));
     }

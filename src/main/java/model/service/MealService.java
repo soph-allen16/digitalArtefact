@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//Gathers user input for passing to meal repository.
 public class MealService {
     private final MealRepository mealRepository;
     private final IngredientService ingredientService;
@@ -30,7 +31,8 @@ public class MealService {
         System.out.println(meal.toString());
     }
 
-    //delete
+    //delete meal by id
+    // Verifies the meal exists and prompts user for confirmation
     public void deleteMealById(){
         int id = InputHelper.getIntegerInput("Enter the ID of the meal you would like to delete");
         Meal meal = mealRepository.findMealById(id);
@@ -67,10 +69,10 @@ public class MealService {
             if(s.isBlank()){
                 continue;
             }
-
             Ingredient ingredient;
+
+            //If the ingredient isn't already in the list, add it
             if( ingredientService.findIngredientByName(s)==null ){
-                //If the ingredient isn't already in the list, add it
                 ingredient = ingredientService.addIngredient(s, InputHelper.getStringInput("Please enter a unit for "  + s));
             }else{
                 //If it is already in the list, get it
@@ -83,18 +85,12 @@ public class MealService {
         mealRepository.addMeal(name, ingredients);
     }
 
-    //find by id- with user input overload
-    //Safe to delete?
-    public Meal findMealById(){
-        int id = InputHelper.getIntegerInput("Please enter the ID of a meal");
-        return findMealById(id);
-    }
-
-    //find by ID
+    //find meal by ID
     public Meal findMealById(int id){
         return mealRepository.findMealById(id);
     }
 
+    //Find meal based on any user input - id or name
     public Meal findMeal(String input){
         if( mealRepository.findMealById( Integer.parseInt(input) ) != null){
             return mealRepository.findMealById( Integer.parseInt(input) );
@@ -103,6 +99,7 @@ public class MealService {
         }
     }
 
+    //Return all meals for saving
     public List<Meal> getMeals(){
         return mealRepository.getAllMeals();
     }

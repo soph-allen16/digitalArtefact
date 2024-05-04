@@ -8,34 +8,27 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
-
+//Repository class for ingredients - stores the full list of saved ingredients and allows creation and deletion
 public class IngredientRepository {
     private final List<Ingredient> ingredientList;
 
     private int counter = 0;
 
+    //Read ingredients list from csv file
+    //Initialise counter above the maximum ID value in the list - so all new entries get a unique ID.
     public IngredientRepository(){
         ingredientList = IngredientFileUtil.readIngredientsFromFile();
         counter = ingredientList.stream().max(Comparator.comparing(Ingredient::getIngredientId)).get().getIngredientId() + 1;
     }
 
+    //Returns full list of ingredients
     public List<Ingredient> getAllIngredients(){
         return this.ingredientList;
     }
 
-
+    //Checks if the ingredient already exists and adds it to the list
     public Ingredient addIngredient(String ingredientName, String unit){
-        Ingredient ingredient = addIngredient(ingredientName);
-
-        if(ingredient != null){
-            ingredient.setUnit(unit);
-        }
-
-        return ingredient;
-    }
-
-    public Ingredient addIngredient(String ingredientName){
-        Ingredient ingredient = new Ingredient(counter, ingredientName);
+        Ingredient ingredient = new Ingredient(counter, ingredientName, unit);
 
         if(ingredientList.contains(ingredient)){
             System.out.println("This ingredient is already in the list");
@@ -47,6 +40,7 @@ public class IngredientRepository {
         }
     }
 
+    //Checks if an ingredient exists and deletes it from the list
     public void removeIngredient( Ingredient ingredient ){
         if( ingredient == null ){
             System.out.println("The ingredient you entered does not exist.");
@@ -55,6 +49,7 @@ public class IngredientRepository {
         }
     }
 
+    //Returns ingredient matching the string input if exists
     public Ingredient findIngredientByName(String name){
         for( Ingredient i : ingredientList ) {
             if (i.getIngredientName().equalsIgnoreCase(name)) {
@@ -64,6 +59,7 @@ public class IngredientRepository {
         return null;
     }
 
+    //Returns ingredient matching the ID input if exists
     public Ingredient findIngredientById(int id){
         for( Ingredient i : ingredientList ) {
             if ( i.getIngredientId() == id ) {
@@ -73,18 +69,4 @@ public class IngredientRepository {
         return null;
     }
 
-//    public void updateIngredient(int id, String newName){
-//        Ingredient ingredient = findIngredientById(id);
-//
-//        //null if ingredient doesn't already exist - can't be found
-//        Ingredient alreadyExists = findIngredientByName(newName);
-//
-//        if(ingredient == null ){
-//            System.out.println("This operation cannot be performed: Ingredient with the id: " + id + " does not exist.");
-//        }else if( (alreadyExists != null) && (ingredient.getIngredientId() != alreadyExists.getIngredientId()) ){
-//            System.out.println("This operation cannot be performed: ingredient with this name already exists");
-//        }else if( ! newName.isBlank() ) {
-//            ingredient.setIngredientName(newName);
-//        }
-//    }
 }

@@ -1,21 +1,15 @@
 package model.entity;
 
+//Ingredient entity storing basic information: name, unit of measurement and ID.
+
 public class Ingredient {
     private int ingredientId;
     private String ingredientName;
     private String unit;
 
-    public Ingredient(String ingredientName){
-        this.ingredientName = ingredientName;
-    }
-
-    public Ingredient(int ingredientId, String ingredientName){
-        this(ingredientName);
-        this.ingredientId = ingredientId;
-    }
-
     public Ingredient(int ingredientId, String ingredientName,  String unit){
-        this(ingredientId, ingredientName);
+        this.ingredientId = ingredientId;
+        this.ingredientName = ingredientName;
         this.unit = unit;
     }
 
@@ -23,24 +17,12 @@ public class Ingredient {
         return unit;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
     public String getIngredientName() {
         return ingredientName;
     }
 
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
-    }
-
     public int getIngredientId() {
         return ingredientId;
-    }
-
-    public void setIngredientId(int ingredientId) {
-        this.ingredientId = ingredientId;
     }
 
     @Override

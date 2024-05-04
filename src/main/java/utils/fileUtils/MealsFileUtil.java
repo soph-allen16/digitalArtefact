@@ -23,14 +23,13 @@ public class MealsFileUtil {
             for(Meal i : meals) {
                 bufferedWriter.write(i.toCSV() + "\n");
             }
-
             bufferedWriter.close();
-
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
     }
 
+    //Read meals from file and return entity
     public static List<Meal> readMealsFromFile(IngredientService ingredientService){
         File file = new File(MEAL_FILE);
         List<Meal> meals = new ArrayList<>();
@@ -38,13 +37,11 @@ public class MealsFileUtil {
         if(!file.exists()){
             return meals;
         }
-
         try{
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()){
                 meals.add( getMealFromRow( scanner.nextLine(), ingredientService) );
             }
-
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -72,14 +69,11 @@ public class MealsFileUtil {
             }
             //Split by colon, stored in the form IngredientName:Qty
             String[] mapValues = s.split(":");
-
             //Find the ingredient with the corresponding name
             Ingredient ingredient = ingredientService.findIngredientByName(mapValues[0]);
-
             //Add the ingredient and value to the hashmap
             ingredients.put(ingredient,Integer.parseInt( mapValues[1] ) );
         }
-
         return new Meal(Integer.parseInt(rowValues[0]), rowValues[1], ingredients);
     }
 }
