@@ -2,7 +2,7 @@ package utils;
 
 public class OutputHelper {
 
-    public static final int titleSize = 30;
+    public static final int titleSize = TableHelper.tableWidth+2;
 
     public static void printTitle(String string){
         System.out.println(createTitle(string));

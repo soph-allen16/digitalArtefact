@@ -2,15 +2,18 @@ package model.repository;
 
 import model.entity.Ingredient;
 import model.entity.Meal;
-import utils.InputHelper;
 import utils.fileUtils.MealsFileUtil;
-import view.service.IngredientService;
+import model.service.IngredientService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/*
+    Class to hold meals while application is running, with methods for CRUD features
+*/
+
 public class MealRepository {
+
     private final List<Meal> mealList;
     private int counter = 0 ;
 

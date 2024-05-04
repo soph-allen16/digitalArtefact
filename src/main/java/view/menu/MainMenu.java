@@ -1,8 +1,8 @@
 package view.menu;
 
-import view.service.IngredientService;
-import view.service.MealPlanService;
-import view.service.MealService;
+import model.service.IngredientService;
+import model.service.MealPlanService;
+import model.service.MealService;
 
 public class MainMenu extends Menu {
     private final EditMenu editMenu;

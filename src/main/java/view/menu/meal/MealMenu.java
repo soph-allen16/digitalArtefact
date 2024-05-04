@@ -2,7 +2,7 @@ package view.menu.meal;
 
 import utils.InputHelper;
 import view.menu.Menu;
-import view.service.MealService;
+import model.service.MealService;
 
 public class MealMenu extends Menu {
 
@@ -15,7 +15,7 @@ public class MealMenu extends Menu {
         this.mealService = mealService;
 
         //Set menu information
-        menuName = "View/Edit Ingredients";
+        menuName = "View/Edit Meals";
         menuOptions = new String[] {
                 "View list of meals",
                 "View meal details",

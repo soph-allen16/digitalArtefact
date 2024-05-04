@@ -1,12 +1,13 @@
 package controller;
 
 import utils.fileUtils.IngredientFileUtil;
+import utils.fileUtils.MealPlanFileUtil;
 import utils.fileUtils.MealsFileUtil;
 import view.menu.MainMenu;
-import view.service.IngredientService;
+import model.service.IngredientService;
 import utils.InputHelper;
-import view.service.MealPlanService;
-import view.service.MealService;
+import model.service.MealPlanService;
+import model.service.MealService;
 
 public class Controller {
 
@@ -23,6 +24,7 @@ public class Controller {
         this.mainMenu = new MainMenu(ingredientService, mealService, mealPlanService);
         IngredientFileUtil.saveIngredientsToFile(ingredientService.getIngredientsList());
         MealsFileUtil.saveMealsToFile(mealService.getMeals());
+        MealPlanFileUtil.saveMealPlansToFile(mealPlanService.getMealPlans());
         InputHelper.closeScanner();
     }
 

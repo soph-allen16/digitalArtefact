@@ -1,41 +1,56 @@
 package model.entity;
 
-import view.service.MealService;
-
 import java.util.*;
 
 public class MealPlan {
-    private LinkedHashMap<String, Meal> mealPlan;
-    private String date;
-    private int mealPlanId;
-    Calendar calendar = Calendar.getInstance();
 
-    public MealPlan(LinkedHashMap<String,Meal> mealPlan, String date, int mealPlanId) {
-        this.mealPlan = mealPlan;
+    private int mealPlanId;
+    private String name;
+    private LinkedHashMap<String, Meal> mealPlan;
+
+    public MealPlan(int mealPlanId, String name, LinkedHashMap<String,Meal> mealPlan) {
         this.mealPlanId = mealPlanId;
-        this.date = date;
+        this.name = name;
+        this.mealPlan = mealPlan;
     }
 
+    //getters and setters
     public HashMap<String, Meal> getMealPlan() {
         return mealPlan;
     }
-
     public void setMealPlan(LinkedHashMap<String, Meal> mealPlan) {
         this.mealPlan = mealPlan;
+    }
+
+    public int getMealPlanId() {
+        return mealPlanId;
+    }
+
+    public String getMealPlanName() {
+        return name;
     }
 
     @Override
     public String toString(){
         StringBuilder str = new StringBuilder();
         str.append("Meal Plan ID: ").append(mealPlanId).append("\r\n");
-        str.append("Meal Plan Date: ").append(date).append("\r\n\r\n");
+        str.append("Meal Plan Name: ").append(name).append("\r\n\r\n");
         for(String day : mealPlan.keySet() ){
             str.append( day ).append(" : ").append(mealPlan.get(day).getMealName()).append("\r\n");
         }
         return str.toString();
     }
 
-    public int getMealPlanId() {
-        return mealPlanId;
+    public String toCSV(){
+        StringBuilder s = new StringBuilder();
+
+        //Add ID and Name in usual CSV format
+        s.append(mealPlanId).append(",").append(name).append(",");
+
+        //Add day to string in the form day:meal;
+        for(String date : mealPlan.keySet() ){
+            s.append(date).append(":").append(mealPlan.get(date).getMealId()).append(";");
+        }
+        return s.toString();
     }
 }

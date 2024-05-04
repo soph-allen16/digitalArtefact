@@ -55,6 +55,7 @@ public class Meal {
         return this.mealName.equalsIgnoreCase(m.getMealName());
     }
 
+    //Override the toString method for easy printing to console
     @Override
     public String toString(){
         StringBuilder str = new StringBuilder();
@@ -74,8 +75,10 @@ public class Meal {
     public String toCSV(){
         StringBuilder s = new StringBuilder();
 
+        //Add ID and name in usual CSV format
         s.append(mealId).append(",").append(mealName).append(",");
 
+        //Add ingredient in the form ingredient:qty;
         for(Ingredient i : ingredients.keySet()){
             s.append(i.getIngredientName()).append(":").append(ingredients.get(i)).append(";");
         }

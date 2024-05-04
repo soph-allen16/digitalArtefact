@@ -1,4 +1,4 @@
-package view.service;
+package model.service;
 
 
 import model.repository.IngredientRepository;
@@ -11,15 +11,13 @@ import java.util.List;
 
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
-    private final TableHelper tableHelper;
 
     public IngredientService(){
-        this.tableHelper = new TableHelper();
         this.ingredientRepository = new IngredientRepository();
     }
 
     public void viewIngredientList(){
-        tableHelper.printTable(tableHelper.createIngredientTableFromList(ingredientRepository.getAllIngredients()), new String[] {"ID", "Name"}, "Ingredients" );
+        TableHelper.printTwoColumnTable(TableHelper.createIngredientTableFromList(ingredientRepository.getAllIngredients()), new String[] {"ID", "Name"});
     }
 
     public List<Ingredient> getIngredientsList(){

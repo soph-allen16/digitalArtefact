@@ -1,7 +1,7 @@
 package view.menu.ingredient;
 
 import view.menu.Menu;
-import view.service.IngredientService;
+import model.service.IngredientService;
 
 public class IngredientMenu extends Menu {
     private final IngredientService ingredientService;

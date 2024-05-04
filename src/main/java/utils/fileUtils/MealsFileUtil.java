@@ -2,7 +2,7 @@ package utils.fileUtils;
 
 import model.entity.Ingredient;
 import model.entity.Meal;
-import view.service.IngredientService;
+import model.service.IngredientService;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -36,6 +36,7 @@ public class MealsFileUtil {
         List<Meal> meals = new ArrayList<>();
 
         if(!file.exists()){
+            return meals;
         }
 
         try{
@@ -50,6 +51,8 @@ public class MealsFileUtil {
         return meals;
     }
 
+    //Using a custom deserialization method due to issues importing libraries when switching between home and uni
+    //Obtains meal from stored format
     public static Meal getMealFromRow(String row, IngredientService ingredientService){
         HashMap<Ingredient, Integer> ingredients = new HashMap<>();
         String[] rowValues = row.split(",");
@@ -59,7 +62,7 @@ public class MealsFileUtil {
             return null;
         }
 
-        //Deserialise the stored hashmap, stored in the form: Ingredient1:qty1;ingredient2:qty2
+        //Deserialize the stored hashmap, stored in the form: Ingredient1:qty1;ingredient2:qty2
         String[] hashMapValues = rowValues[2].split(";");
 
         for(String s : hashMapValues){
@@ -67,7 +70,7 @@ public class MealsFileUtil {
             if(s.isBlank()){
                 continue;
             }
-            //Split by semicolon, stored in the form IngredientName:Qty
+            //Split by colon, stored in the form IngredientName:Qty
             String[] mapValues = s.split(":");
 
             //Find the ingredient with the corresponding name

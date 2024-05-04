@@ -1,4 +1,4 @@
-package view.service;
+package model.service;
 
 import constants.Weekdays;
 import model.entity.Meal;
@@ -6,9 +6,15 @@ import model.entity.MealPlan;
 import model.repository.MealPlanRepository;
 import utils.InputHelper;
 import utils.OutputHelper;
+import utils.TableHelper;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
+
+/*
+    Class to handle user input and validation for the Meal Plan repository, and interface between repository and menus
+    Summary of methods: add meal plan, View meal plan, get list of meal plans
+ */
 
 public class MealPlanService {
 
@@ -17,28 +23,31 @@ public class MealPlanService {
 
     public MealPlanService(MealService mealService) {
         this.mealService = mealService;
-        this.mealPlanRepository = new MealPlanRepository();
+        this.mealPlanRepository = new MealPlanRepository(mealService);
     }
 
-    public void addNewMeal(){
+    //Handles user input when creating a meal plan
+    public void addNewMealPlan(){
         OutputHelper.printTitle("Create Meal Plan");
-        String planDate = InputHelper.getStringInput("Please enter a date (dd/mm/yy)");
+
+        //Get a name for the meal plan
+        String planDate = InputHelper.getStringInput("Please enter a name");
         LinkedHashMap<String, Meal> weeklyMeals = new LinkedHashMap<>();
 
         if( InputHelper.getStringInput("Would you like to view saved meals? (y/n)").equalsIgnoreCase("y") ){
             mealService.viewMealList();
         }
 
+        //Loop through the days of the week and get a meal for each
         for(String weekday : Weekdays.DAYS_OF_WEEK ){
             String input = InputHelper.getStringInput("Enter a meal name or meal ID for " + weekday );
-
             Meal dayMeal = mealService.findMeal(input);
 
+            //Check that meal exists
             while (dayMeal == null){
                 System.out.println("Meal cannot be found. Please try again.");
                 dayMeal = mealService.findMeal(input);
             }
-
             weeklyMeals.put(weekday, dayMeal);
         }
 
@@ -46,9 +55,19 @@ public class MealPlanService {
         System.out.println("Meal plan successfully added.");
     }
 
+    //Use table helper to view a list of saved meal plans
+    public void viewMealPlanList(){
+        TableHelper.printTwoColumnTable(TableHelper.createMealPlanTableFromList(mealPlanRepository.getMealPlans()), new String[] {"ID", "Name"});
+        String input = InputHelper.getStringInput("Would you like to view a specific meal? (y/n)");
+
+        if(input.equalsIgnoreCase("y")){
+            viewMealPlan();
+        }
+    }
+
+    //Get user input when they wish to view a meal plan - handle incorrect input
     public void viewMealPlan(){
         MealPlan meal = mealPlanRepository.getMealPlanById( InputHelper.getPositiveIntegerInput("Enter the ID of the meal plan you would like to view") );
-
         if(meal != null){
             System.out.println(meal.toString());
         }else{
@@ -56,5 +75,8 @@ public class MealPlanService {
         }
     }
 
-
+    //Retrieve list of meal plans for saving to file
+    public List<MealPlan> getMealPlans(){
+        return mealPlanRepository.getMealPlans();
+    }
 }
