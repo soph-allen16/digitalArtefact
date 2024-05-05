@@ -6,13 +6,10 @@ import model.entity.MealPlan;
 import utils.fileUtils.MealPlanFileUtil;
 import model.service.MealService;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 public class MealPlanRepository {
-    private int counter = 0;
+    private int counter;
     private List<MealPlan> mealPlans = new ArrayList<>();
 
     //Read meal plans from file when class is instantiated
@@ -56,5 +53,24 @@ public class MealPlanRepository {
         }else{
             mealPlans.remove(mealPlan);
         }
+    }
+
+    //Generate shopping list of all ingredients
+    public HashMap<Ingredient, Integer> generateShoppingList(MealPlan mealPlan){
+        HashMap<Ingredient, Integer> shoppingList = new HashMap<>();
+
+        //Loop through each meal in the week
+        for(Meal m : mealPlan.getMealPlan().values()){
+            HashMap<Ingredient, Integer> mealIngredients = m.getIngredients();
+
+            //Loop through ingredients of the meal and add to shopping list
+            for(Ingredient i : mealIngredients.keySet()){
+
+                //If ingredient in the list, add to qty, if not then add it to the list
+                shoppingList.put(i, shoppingList.getOrDefault(i, 0)+ mealIngredients.get(i));
+            }
+        }
+
+        return shoppingList;
     }
 }

@@ -2,7 +2,6 @@ package model.repository;
 
 import model.entity.Ingredient;
 import model.entity.Meal;
-import model.entity.MealPlan;
 import utils.fileUtils.MealsFileUtil;
 import model.service.IngredientService;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class MealRepository {
 
     private final List<Meal> mealList;
-    private int counter = 0 ;
+    private int counter;
 
     //Read meals from CSV file on class instantiation
     //Initialise counter above max value of all IDs already in the list

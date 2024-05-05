@@ -16,7 +16,7 @@ public class MainMenu extends Menu {
 
     public MainMenu(IngredientService ingredientService,
                     MealService mealService,
-                    MealPlanService mealPlanService, MealMenu mealMenu){
+                    MealPlanService mealPlanService){
         super();
         //Initialise dependencies
         this.ingredientMenu = new IngredientMenu(ingredientService);

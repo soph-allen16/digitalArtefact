@@ -15,7 +15,8 @@ public class MealPlanningMenu extends Menu {
         menuOptions = new String[] {
                 "Add new meal plan",
                 "View list of meal plans",
-                "View meal plan details"
+                "View meal plan details",
+                "Generate shopping list"
         };
     }
 
@@ -32,6 +33,9 @@ public class MealPlanningMenu extends Menu {
             }else if(choice == 3){
                 //View specific meal plan
                 mealPlanService.viewMealPlan();
+            }else if(choice==4){
+                //generate shopping list
+                mealPlanService.getShoppingList(InputHelper.getIntegerInput("Enter the ID of a meal plan"));
             }
             super.runMenu();
         }

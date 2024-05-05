@@ -23,8 +23,8 @@ public class Meal {
         return mealName;
     }
 
-    public void setMealName(String mealName) {
-        this.mealName = mealName;
+    public HashMap<Ingredient, Integer> getIngredients() {
+        return ingredients;
     }
 
     @Override

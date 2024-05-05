@@ -25,6 +25,10 @@ public class MealPlan {
         return name;
     }
 
+    public LinkedHashMap<String, Meal> getMealPlan() {
+        return mealPlan;
+    }
+
     //Override toString method for easy printing to console
     @Override
     public String toString(){
