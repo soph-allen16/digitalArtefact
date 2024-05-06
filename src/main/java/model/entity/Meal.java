@@ -49,7 +49,7 @@ public class Meal {
             str.append("\r\n").append("(Id: ")
                     .append(i.getIngredientId()).append(") ").append(i.getIngredientName())
                     .append(" x ")
-                    .append(this.ingredients.get(i)).append(" ").append(i.getUnit());
+                    .append(this.ingredients.get(i)).append(" ").append(i.getIngredientUnit());
         }
 
         return str.toString();

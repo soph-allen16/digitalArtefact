@@ -18,7 +18,7 @@ public class IngredientRepository {
     //Initialise counter above the maximum ID value in the list - so all new entries get a unique ID.
     public IngredientRepository(){
         ingredientList = IngredientFileUtil.readIngredientsFromFile();
-        counter = ingredientList.stream().max(Comparator.comparing(Ingredient::getIngredientId)).get().getIngredientId() + 1;
+        counter = ingredientList.isEmpty() ? 0 : ingredientList.stream().max(Comparator.comparing(Ingredient::getIngredientId)).get().getIngredientId() + 1;
     }
 
     //Returns full list of ingredients
@@ -31,8 +31,7 @@ public class IngredientRepository {
         Ingredient ingredient = new Ingredient(counter, ingredientName, unit);
 
         if(ingredientList.contains(ingredient)){
-            System.out.println("This ingredient is already in the list");
-            return null;
+            throw new UnsupportedOperationException("Ingredient already exists: cannot be created");
         }else{
             ingredientList.add(ingredient);
             counter++;
@@ -43,7 +42,7 @@ public class IngredientRepository {
     //Checks if an ingredient exists and deletes it from the list
     public void removeIngredient( Ingredient ingredient ){
         if( ingredient == null ){
-            System.out.println("The ingredient you entered does not exist.");
+            throw new NoSuchElementException("Ingredient does not exist: cannot be deleted");
         }else{
             ingredientList.remove(ingredient);
         }

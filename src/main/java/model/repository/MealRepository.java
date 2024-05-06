@@ -8,6 +8,7 @@ import model.service.IngredientService;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 //Class to hold meals while application is running, with methods for CRUD features
 
 public class MealRepository {
@@ -19,7 +20,7 @@ public class MealRepository {
     //Initialise counter above max value of all IDs already in the list
     public MealRepository(IngredientService ingredientService){
         mealList = MealsFileUtil.readMealsFromFile(ingredientService);
-        counter = mealList.stream().max(Comparator.comparing(Meal::getMealId)).get().getMealId() + 1;
+        counter = mealList.isEmpty() ? 0 : mealList.stream().max(Comparator.comparing(Meal::getMealId)).get().getMealId() + 1;
     }
 
     //Return full list of meals
@@ -28,20 +29,21 @@ public class MealRepository {
     }
 
     //Add new meal if it doesn't already exist
-    public void addMeal(String mealName, HashMap<Ingredient, Integer> ingredients){
+    public Meal addMeal(String mealName, HashMap<Ingredient, Integer> ingredients){
         Meal meal = new Meal(counter , mealName, ingredients);
         if( mealList.contains(meal) ){
-            System.out.println("This meal already exists!");
+            throw new UnsupportedOperationException("Cannot be performed: meal already exists.");
         }else{
             mealList.add(meal);
             counter++;
         }
+        return meal;
     }
 
     //Delete meal if not null
     public void removeMeal(Meal meal){
         if( meal == null ){
-            System.out.println("The meal you entered does not exist!");
+            throw new NoSuchElementException("Cannot be performed: no such meal exists.");
         }else{
             mealList.remove(meal);
         }

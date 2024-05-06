@@ -29,13 +29,22 @@ public class IngredientService {
     public void addIngredient(){
         String name = InputHelper.getStringInput("Please enter the name of the ingredient");
         String unit = InputHelper.getStringInput("Please enter a unit of measurement");
-        ingredientRepository.addIngredient( name, unit );
+        try {
+            ingredientRepository.addIngredient(name, unit);
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
     }
 
     //Allows creation of ingredient with values passed
     //Used when creating a meal with ingredients which do not already exist
     public Ingredient addIngredient(String name, String unit){
-        return ingredientRepository.addIngredient(name, unit);
+        try {
+            return ingredientRepository.addIngredient(name, unit);
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 
     //Searches for ingredient using name
@@ -56,7 +65,11 @@ public class IngredientService {
             String input = InputHelper.getStringInput();
 
             if (input.equalsIgnoreCase("y")) {
-                ingredientRepository.removeIngredient(ingredient);
+                try {
+                    ingredientRepository.removeIngredient(ingredient);
+                }catch(Exception e){
+                    System.err.println(e.getMessage());
+                }
             } else if (input.equalsIgnoreCase("n")) {
                 System.out.println("Ingredient not deleted.");
             } else {

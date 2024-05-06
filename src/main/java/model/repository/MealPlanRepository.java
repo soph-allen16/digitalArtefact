@@ -16,7 +16,7 @@ public class MealPlanRepository {
     //Initialise the counter above the max ID from the list of meal plans
     public MealPlanRepository(MealService mealService){
         mealPlans = MealPlanFileUtil.readMealPlansFromFile(mealService);
-        counter = mealPlans.stream().max(Comparator.comparing(MealPlan::getMealPlanId)).get().getMealPlanId() + 1;
+        counter = mealPlans.isEmpty() ? 0 : mealPlans.stream().max(Comparator.comparing(MealPlan::getMealPlanId)).get().getMealPlanId() + 1;
     }
 
     //return list of all meal plans
@@ -25,15 +25,15 @@ public class MealPlanRepository {
     }
 
     //Check if meal plan exists and if not then add new meal plan to list
-    public void addMealPlan(LinkedHashMap<String, Meal> weeklyMeals, String date){
-        MealPlan mealPlan = new MealPlan(counter, date, weeklyMeals);
-
+    public MealPlan addMealPlan(String name,LinkedHashMap<String, Meal> weeklyMeals){
+        MealPlan mealPlan = new MealPlan(counter, name, weeklyMeals);
         if(mealPlans.contains(mealPlan) ){
-            System.out.println("Meal plan already in the list!");
+            throw new UnsupportedOperationException("Cannot be performed: meal plan already exists");
         }else{
             mealPlans.add(mealPlan);
             counter++;
         }
+        return mealPlan;
     }
 
     //Find meal plan from the repository using ID, else return null
@@ -49,7 +49,7 @@ public class MealPlanRepository {
     //Delete meal plan from list
     public void deleteMealPlan(MealPlan mealPlan){
         if(mealPlan==null){
-            System.out.println("Meal plan does not exist!");
+            throw new NoSuchElementException("Cannot be performed: Meal plan does not exist.");
         }else{
             mealPlans.remove(mealPlan);
         }
@@ -60,7 +60,7 @@ public class MealPlanRepository {
         HashMap<Ingredient, Integer> shoppingList = new HashMap<>();
 
         //Loop through each meal in the week
-        for(Meal m : mealPlan.getMealPlan().values()){
+        for(Meal m : mealPlan.getMealPlanList().values()){
             HashMap<Ingredient, Integer> mealIngredients = m.getIngredients();
 
             //Loop through ingredients of the meal and add to shopping list

@@ -30,7 +30,7 @@ public class MealPlanService {
             OutputHelper.printTitle("Create Meal Plan");
 
             //Get a name for the meal plan
-            String planDate = InputHelper.getStringInput("Please enter a name");
+            String planName = InputHelper.getStringInput("Please enter a name");
             LinkedHashMap<String, Meal> weeklyMeals = new LinkedHashMap<>();
 
             if (InputHelper.getStringInput("Would you like to view saved meals? (y/n)").equalsIgnoreCase("y")) {
@@ -50,7 +50,11 @@ public class MealPlanService {
                 weeklyMeals.put(weekday, dayMeal);
             }
 
-            mealPlanRepository.addMealPlan(weeklyMeals, planDate);
+            try {
+                mealPlanRepository.addMealPlan(planName, weeklyMeals);
+            }catch(Exception e){
+                System.err.println(e.getMessage());
+            }
             System.out.println("Meal plan successfully added.");
         }
 
@@ -94,7 +98,11 @@ public class MealPlanService {
                 String input = InputHelper.getStringInput();
 
                 if (input.equalsIgnoreCase("Y")) {
-                    mealPlanRepository.deleteMealPlan(mealPlan);
+                    try {
+                        mealPlanRepository.deleteMealPlan(mealPlan);
+                    }catch(Exception e){
+                        System.err.println(e.getMessage());
+                    }
                 } else if (input.equalsIgnoreCase("n")) {
                     System.out.println("Meal plan not deleted");
                 } else {
@@ -115,7 +123,7 @@ public class MealPlanService {
 
                 HashMap<Ingredient, Integer> shoppingList = mealPlanRepository.generateShoppingList(mealPlan);
                 for (Ingredient i : shoppingList.keySet()) {
-                    str.append(i.getIngredientName()).append(" x ").append(shoppingList.get(i)).append(" ").append(i.getUnit()).append("\r\n");
+                    str.append(i.getIngredientName()).append(" x ").append(shoppingList.get(i)).append(" ").append(i.getIngredientUnit()).append("\r\n");
                 }
                 System.out.println(str.toString());
             }

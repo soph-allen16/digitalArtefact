@@ -44,7 +44,11 @@ public class MealService {
             String input = InputHelper.getStringInput();
 
             if(input.equalsIgnoreCase("y")){
-                mealRepository.removeMeal(meal);
+                try {
+                    mealRepository.removeMeal(meal);
+                }catch (Exception e){
+                    System.err.println(e.getMessage());
+                }
             }else if(input.equalsIgnoreCase("n")){
                 System.out.println("Meal not deleted.");
             }else{
@@ -78,11 +82,15 @@ public class MealService {
                 //If it is already in the list, get it
                 ingredient = ingredientService.findIngredientByName(s);
             }
-
             //Add to the quantity map the ingredient and the quantity the user enters
-            ingredients.put(ingredient, InputHelper.getPositiveIntegerInput( "Quantity of "+ ingredient.getIngredientName() + " ("+ingredient.getUnit()+") "));
+            ingredients.put(ingredient, InputHelper.getPositiveIntegerInput( "Quantity of "+ ingredient.getIngredientName() + " ("+ingredient.getIngredientUnit()+") "));
         }
-        mealRepository.addMeal(name, ingredients);
+
+        try {
+            mealRepository.addMeal(name, ingredients);
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
     }
 
     //find meal by ID
