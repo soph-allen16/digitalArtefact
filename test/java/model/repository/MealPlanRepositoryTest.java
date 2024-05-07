@@ -1,6 +1,5 @@
 package model.repository;
 
-import model.entity.Meal;
 import model.entity.MealPlan;
 import model.service.IngredientService;
 import model.service.MealService;
@@ -22,12 +21,12 @@ public class MealPlanRepositoryTest {
 
     @DisplayName("Test add and delete meal plan with success")
     @Test
-    public void testAddAndDeleteMealPlan(){
+    public void testAddAndRemoveMealPlan(){
         MealPlan mealPlan = mealPlanRepository.addMealPlan("Meal plan", null);
         assertNotNull(mealPlan);
         assert(mealPlanRepository.getMealPlans()).contains(mealPlan);
 
-        mealPlanRepository.deleteMealPlan(mealPlan);
+        mealPlanRepository.removeMealPlan(mealPlan);
         assertFalse(mealPlanRepository.getMealPlans().contains(mealPlan));
     }
 
@@ -39,8 +38,8 @@ public class MealPlanRepositoryTest {
 
     @DisplayName("Test delete ingredient with failure")
     @Test
-    public void testDeleteMealPlanWithFailure(){
-        assertThrows(NoSuchElementException.class, ()-> mealPlanRepository.deleteMealPlan(null));
+    public void testRemoveMealPlanWithFailure(){
+        assertThrows(NoSuchElementException.class, ()-> mealPlanRepository.removeMealPlan(null));
     }
 
     @DisplayName("Test find by id")

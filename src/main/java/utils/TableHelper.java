@@ -27,9 +27,10 @@ public class TableHelper {
 
         //Centers the headers in the column using the format created above
         System.out.format(format, headerArray);
+
         //Prints a long divider for the headers
         System.out.println(OutputHelper.createCharString('_', tableWidth+3));
-        //Prints each row in the table
+        //Prints each row in the table if there are any
         if(table!=null) {
             for (String[] row : table) {
                 System.out.format(format, row);

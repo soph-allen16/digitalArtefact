@@ -9,9 +9,10 @@ public class MealPlanningMenu extends Menu {
 
     public MealPlanningMenu(MealPlanService mealPlanService) {
         super();
+        //Initialise fields
         this.mealPlanService = mealPlanService;
+        //Set menu options and name
         menuName = "Meal Planning";
-
         menuOptions = new String[] {
                 "Add new meal plan",
                 "View list of meal plans",

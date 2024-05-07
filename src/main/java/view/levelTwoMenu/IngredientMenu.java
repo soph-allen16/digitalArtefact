@@ -9,10 +9,8 @@ public class IngredientMenu extends Menu {
 
     public IngredientMenu(IngredientService ingredientService){
         super();
-
-        //Initialise dependencies
+        //Initialise fields
         this.ingredientService = ingredientService;
-
         //Initialise menu items
         menuName = "View/Edit Ingredients";
         menuOptions = new String[] {
@@ -31,6 +29,9 @@ public class IngredientMenu extends Menu {
             } else if (choice == 2) {
                 //Add new ingredient
                 ingredientService.addIngredient();
+            }else if (choice==3){
+                //delete ingredient
+                ingredientService.deleteIngredient(InputHelper.getIntegerInput("Enter the ID of an ingredient"));
             }else if(choice == 4) {
                 //Delete ingredient
                 ingredientService.deleteIngredient(InputHelper.getIntegerInput("Enter the ID of the ingredient you would like to delete"));

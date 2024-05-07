@@ -1,5 +1,7 @@
 package model.entity;
 
+import utils.OutputHelper;
+
 import java.util.HashMap;
 
 //Entity for storing meals and their ingredients with quantities
@@ -27,6 +29,7 @@ public class Meal {
         return ingredients;
     }
 
+    //Override equals to use meal name for comparison
     @Override
     public boolean equals(Object obj) {
         if( obj == this){
@@ -42,7 +45,7 @@ public class Meal {
     @Override
     public String toString(){
         StringBuilder str = new StringBuilder();
-        str.append("Name: ").append(this.mealName).append("\r\n");
+        str.append(OutputHelper.createTitle(this.mealName));
         str.append("Ingredients:");
 
         for( Ingredient i : this.ingredients.keySet() ){
@@ -55,7 +58,7 @@ public class Meal {
         return str.toString();
     }
 
-    //Create custom CSV method to store the hashmap properly
+    //Create custom CSV method to store the hashmap easily
     public String toCSV(){
         StringBuilder s = new StringBuilder();
 

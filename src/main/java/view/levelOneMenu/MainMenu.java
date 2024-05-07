@@ -9,16 +9,15 @@ import view.levelTwoMenu.MealPlanningMenu;
 import view.Menu;
 
 public class MainMenu extends Menu {
-    private final MealPlanningMenu mealPlanningMenu;
     private final IngredientMenu ingredientMenu;
     private final MealMenu mealMenu;
-
+    private final MealPlanningMenu mealPlanningMenu;
 
     public MainMenu(IngredientService ingredientService,
                     MealService mealService,
                     MealPlanService mealPlanService){
         super();
-        //Initialise dependencies
+        //Initialise fields
         this.ingredientMenu = new IngredientMenu(ingredientService);
         this.mealMenu = new MealMenu(mealService);
         this.mealPlanningMenu = new MealPlanningMenu( mealPlanService);
@@ -34,15 +33,19 @@ public class MainMenu extends Menu {
         runMenu();
     }
 
+    //Loops through a main menu until user chooses to exit the application
     @Override
     public void runMenu(){
         super.runMenu();
         while(tryAgain) {
             if (choice == 1) {
+                //View or edit ingredients
                 ingredientMenu.runMenu();
             }else if (choice == 2) {
+                //View or edit meals
                 mealMenu.runMenu();
             }else if(choice==3){
+                //Create a meal plan
                 mealPlanningMenu.runMenu();
             }
             super.runMenu();

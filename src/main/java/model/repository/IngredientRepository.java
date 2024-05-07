@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
-//Repository class for ingredients - stores the full list of saved ingredients and allows creation and deletion
+//Repository class for ingredients - stores the full list of saved ingredients and allows creation and deletion operations
+//Methods - get all, add, remove, find by name, find by id
 public class IngredientRepository {
     private final List<Ingredient> ingredientList;
+    private int counter;
 
-    private int counter = 0;
-
-    //Read ingredients list from csv file
-    //Initialise counter above the maximum ID value in the list - so all new entries get a unique ID.
+    //Constructor - Reads ingredients list from csv file
+    //Initialises counter above the maximum ID value in the loaded list - so all new entries get a unique ID.
     public IngredientRepository(){
         ingredientList = IngredientFileUtil.readIngredientsFromFile();
         counter = ingredientList.isEmpty() ? 0 : ingredientList.stream().max(Comparator.comparing(Ingredient::getIngredientId)).get().getIngredientId() + 1;
@@ -39,7 +39,7 @@ public class IngredientRepository {
         }
     }
 
-    //Checks if an ingredient exists and deletes it from the list
+    //Checks if an ingredient exists and deletes it from the list if it does
     public void removeIngredient( Ingredient ingredient ){
         if( ingredient == null ){
             throw new NoSuchElementException("Ingredient does not exist: cannot be deleted");

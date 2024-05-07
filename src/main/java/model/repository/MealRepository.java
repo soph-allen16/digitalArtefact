@@ -9,7 +9,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
-//Class to hold meals while application is running, with methods for CRUD features
+
+//Class to hold meals while application is running, allowing add and delete functionality
+//Methods: get all, add, remove, find by id, find by name
 
 public class MealRepository {
 
@@ -17,7 +19,7 @@ public class MealRepository {
     private int counter;
 
     //Read meals from CSV file on class instantiation
-    //Initialise counter above max value of all IDs already in the list
+    //Initialise counter above max value of all IDs already loaded into list
     public MealRepository(IngredientService ingredientService){
         mealList = MealsFileUtil.readMealsFromFile(ingredientService);
         counter = mealList.isEmpty() ? 0 : mealList.stream().max(Comparator.comparing(Meal::getMealId)).get().getMealId() + 1;

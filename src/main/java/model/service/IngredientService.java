@@ -9,7 +9,8 @@ import utils.TableHelper;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-//Service class for ingredients providing interface between menu and repository, getting user input
+//Service class for ingredients providing interface between menu and repository, getting user input and printing to console
+
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
 

@@ -16,7 +16,7 @@ public class Controller {
     private final MealService mealService;
     private final MealPlanService mealPlanService;
 
-    //Creates initial entities and passes them to the main menu, closes resources when the application finishes and saves entities to csv
+    //Creates initial entities and passes them to the main menu, closes resources when the application finishes and saves entities to csv files
     public Controller(){
         this.ingredientService = new IngredientService();
         this.mealService = new MealService(ingredientService);

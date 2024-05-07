@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 //Class to handle user input and validation for the Meal Plan repository, and interface between repository and menus
-//Summary of methods: add meal plan, View meal plan, get list of meal plans
+
 public class MealPlanService {
 
     private final MealService mealService;
@@ -104,7 +104,7 @@ public class MealPlanService {
                 String input = InputHelper.getStringInput();
 
                 if (input.equalsIgnoreCase("Y")) {
-                    mealPlanRepository.deleteMealPlan(mealPlan);
+                    mealPlanRepository.removeMealPlan(mealPlan);
                 }else if (input.equalsIgnoreCase("n")) {
                     throw new Exception("User cancelled: meal plan not deleted.");
                 }else {

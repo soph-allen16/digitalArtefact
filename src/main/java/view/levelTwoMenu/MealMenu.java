@@ -10,10 +10,8 @@ public class MealMenu extends Menu {
 
     public MealMenu(MealService mealService){
         super();
-
-        //Initialise dependencies
+        //Initialise fields
         this.mealService = mealService;
-
         //Set menu information
         menuName = "View/Edit Meals";
         menuOptions = new String[] {

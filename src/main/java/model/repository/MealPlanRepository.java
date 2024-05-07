@@ -8,6 +8,9 @@ import model.service.MealService;
 
 import java.util.*;
 
+//Stores list of meal plans, allowing for creation and deletion
+//Methods: get all, get by ID, add, remove, generate shopping list
+
 public class MealPlanRepository {
     private int counter;
     private List<MealPlan> mealPlans = new ArrayList<>();
@@ -24,6 +27,16 @@ public class MealPlanRepository {
         return mealPlans;
     }
 
+    //Find meal plan from the repository using ID, else return null
+    public MealPlan getMealPlanById(int id){
+        for(MealPlan m : mealPlans){
+            if(m.getMealPlanId() == id){
+                return m;
+            }
+        }
+        return null;
+    }
+
     //Check if meal plan exists and if not then add new meal plan to list
     public MealPlan addMealPlan(String name,LinkedHashMap<String, Meal> weeklyMeals){
         MealPlan mealPlan = new MealPlan(counter, name, weeklyMeals);
@@ -36,18 +49,8 @@ public class MealPlanRepository {
         return mealPlan;
     }
 
-    //Find meal plan from the repository using ID, else return null
-    public MealPlan getMealPlanById(int id){
-        for(MealPlan m : mealPlans){
-            if(m.getMealPlanId() == id){
-                return m;
-            }
-        }
-        return null;
-    }
-
     //Delete meal plan from list
-    public void deleteMealPlan(MealPlan mealPlan){
+    public void removeMealPlan(MealPlan mealPlan){
         if(mealPlan==null){
             throw new NoSuchElementException("Cannot be performed: Meal plan does not exist.");
         }else{

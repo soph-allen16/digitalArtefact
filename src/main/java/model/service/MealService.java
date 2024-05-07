@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-//Gathers user input for passing to meal repository.
+//Gathers user input and interfaces between menu and repository
+
 public class MealService {
     private final MealRepository mealRepository;
     private final IngredientService ingredientService;
@@ -26,7 +27,7 @@ public class MealService {
         TableHelper.printTwoColumnTable(TableHelper.createMealTableFromList(mealRepository.getAllMeals()), new String[]{"ID", " Name"});
     }
 
-    //view single - prints details about a single meals to console
+    //view single - prints details about a single meal to console
     public void viewMealDetails(int id) {
         Meal meal = mealRepository.findMealById(id);
         System.out.println(meal.toString());

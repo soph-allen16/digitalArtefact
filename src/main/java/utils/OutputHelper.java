@@ -10,6 +10,7 @@ public class OutputHelper {
         System.out.println(createTitle(string));
     }
 
+    //Creates a title in a box
     public static String createTitle(String string){
         StringBuilder s = new StringBuilder();
         s.append(createCharString('*', titleSize)).append("\r\n");
@@ -18,6 +19,7 @@ public class OutputHelper {
         return s.toString();
     }
 
+    //Centers a string given a required size
     public static String centerString(String string, int size){
         int padding = (size - string.length())/2;
         StringBuilder s = new StringBuilder();
