@@ -7,6 +7,8 @@ import model.entity.Ingredient;
 import utils.TableHelper;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 //Service class for ingredients providing interface between menu and repository, getting user input
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
@@ -27,13 +29,7 @@ public class IngredientService {
 
     //Gathers all user inputs to create a new ingredient and passes to repository
     public void addIngredient(){
-        String name = InputHelper.getStringInput("Please enter the name of the ingredient");
-        String unit = InputHelper.getStringInput("Please enter a unit of measurement");
-        try {
-            ingredientRepository.addIngredient(name, unit);
-        }catch(Exception e){
-            System.err.println(e.getMessage());
-        }
+        addIngredient(InputHelper.getStringInput("Please enter the name of the ingredient"), InputHelper.getStringInput("Please enter a unit of measurement"));
     }
 
     //Allows creation of ingredient with values passed
@@ -54,27 +50,26 @@ public class IngredientService {
 
     //Allows ingredient to be deleted
     //Verify that it exists, and prompts user to confirm deletion.
-    public void deleteIngredient() {
-        int id = InputHelper.getIntegerInput("Enter the ID of the ingredient you would like to delete");
+    public void deleteIngredient(int id) {
         Ingredient ingredient = ingredientRepository.findIngredientById(id);
 
-        if (ingredient == null) {
-            System.out.println("No ingredient found with the ID you entered.");
-        } else {
-            System.out.println("Delete " + ingredient.getIngredientName() + " ? Y/N ");
-            String input = InputHelper.getStringInput();
-
-            if (input.equalsIgnoreCase("y")) {
-                try {
-                    ingredientRepository.removeIngredient(ingredient);
-                }catch(Exception e){
-                    System.err.println(e.getMessage());
-                }
-            } else if (input.equalsIgnoreCase("n")) {
-                System.out.println("Ingredient not deleted.");
+        try {
+            if (ingredient == null) {
+                throw new NoSuchElementException("Element does not exist. Cannot be deleted.");
             } else {
-                System.out.println("Invalid input - please try again.");
+                System.out.println("Delete " + ingredient.getIngredientName() + " ? Y/N ");
+                String input = InputHelper.getStringInput();
+
+                if (input.equalsIgnoreCase("y")) {
+                    ingredientRepository.removeIngredient(ingredient);
+                } else if (input.equalsIgnoreCase("n")) {
+                    throw new UnsupportedOperationException("Not deleted. User cancelled.");
+                } else {
+                    throw new IllegalArgumentException("Input must be 'y' or 'n', ingredient not deleted.");
+                }
             }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 }

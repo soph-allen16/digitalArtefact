@@ -12,110 +12,116 @@ import utils.TableHelper;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-    //Class to handle user input and validation for the Meal Plan repository, and interface between repository and menus
-    //Summary of methods: add meal plan, View meal plan, get list of meal plans
+//Class to handle user input and validation for the Meal Plan repository, and interface between repository and menus
+//Summary of methods: add meal plan, View meal plan, get list of meal plans
 public class MealPlanService {
 
-        private final MealService mealService;
-        private final MealPlanRepository mealPlanRepository;
+    private final MealService mealService;
+    private final MealPlanRepository mealPlanRepository;
 
-        public MealPlanService(MealService mealService) {
-            this.mealService = mealService;
-            this.mealPlanRepository = new MealPlanRepository(mealService);
+    public MealPlanService(MealService mealService) {
+        this.mealService = mealService;
+        this.mealPlanRepository = new MealPlanRepository(mealService);
+    }
+
+    //Handles user input when creating a meal plan
+    public MealPlan addNewMealPlan() {
+        OutputHelper.printTitle("Create Meal Plan");
+
+        //Get a name for the meal plan
+        String planName = InputHelper.getStringInput("Please enter a name");
+        LinkedHashMap<String, Meal> weeklyMeals = new LinkedHashMap<>();
+
+        if (InputHelper.getStringInput("Would you like to view saved meals? (y/n)").equalsIgnoreCase("y")) {
+            mealService.viewMealList();
         }
 
-        //Handles user input when creating a meal plan
-        public void addNewMealPlan() {
-            OutputHelper.printTitle("Create Meal Plan");
+        //Loop through the days of the week and get a meal for each
+        for (String weekday : Weekdays.DAYS_OF_WEEK) {
+            String input = InputHelper.getStringInput("Enter a meal name or meal ID for " + weekday);
+            Meal dayMeal = mealService.findMeal(input);
 
-            //Get a name for the meal plan
-            String planName = InputHelper.getStringInput("Please enter a name");
-            LinkedHashMap<String, Meal> weeklyMeals = new LinkedHashMap<>();
-
-            if (InputHelper.getStringInput("Would you like to view saved meals? (y/n)").equalsIgnoreCase("y")) {
-                mealService.viewMealList();
+            //Check that meal exists
+            while (dayMeal == null) {
+                System.out.println("Meal cannot be found. Please try again.");
+                dayMeal = mealService.findMeal(input);
             }
-
-            //Loop through the days of the week and get a meal for each
-            for (String weekday : Weekdays.DAYS_OF_WEEK) {
-                String input = InputHelper.getStringInput("Enter a meal name or meal ID for " + weekday);
-                Meal dayMeal = mealService.findMeal(input);
-
-                //Check that meal exists
-                while (dayMeal == null) {
-                    System.out.println("Meal cannot be found. Please try again.");
-                    dayMeal = mealService.findMeal(input);
-                }
-                weeklyMeals.put(weekday, dayMeal);
-            }
-
-            try {
-                mealPlanRepository.addMealPlan(planName, weeklyMeals);
-            }catch(Exception e){
-                System.err.println(e.getMessage());
-            }
-            System.out.println("Meal plan successfully added.");
+            weeklyMeals.put(weekday, dayMeal);
         }
 
-        //Use table helper to view a list of saved meal plans
-        public void viewMealPlanList() {
-            TableHelper.printTwoColumnTable(TableHelper.createMealPlanTableFromList(mealPlanRepository.getMealPlans()), new String[]{"ID", "Name"});
-            String input = InputHelper.getStringInput("Would you like to view a specific meal? (y/n)");
-
-            if (input.equalsIgnoreCase("y")) {
-                viewMealPlan();
-            }
+        try {
+            return mealPlanRepository.addMealPlan(planName, weeklyMeals);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
+        return null;
+    }
 
-        //Get user input when they wish to view a meal plan - handle incorrect input
-        public void viewMealPlan() {
-            MealPlan meal = mealPlanRepository.getMealPlanById(InputHelper.getPositiveIntegerInput("Enter the ID of the meal plan you would like to view"));
+    //Use table helper to view a list of saved meal plans
+    public void viewMealPlanList() {
+        TableHelper.printTwoColumnTable(TableHelper.createMealPlanTableFromList(mealPlanRepository.getMealPlans()), new String[]{"ID", "Name"});
+        String input = InputHelper.getStringInput("Would you like to view a specific meal plan? (y/n)");
+
+        if (input.equalsIgnoreCase("y")) {
+            viewMealPlan(InputHelper.getPositiveIntegerInput("Enter the ID of the meal plan you would like to view"));
+        }
+    }
+
+    //Get user input when they wish to view a meal plan - handle incorrect input
+    public void viewMealPlan(int id) {
+        MealPlan meal = mealPlanRepository.getMealPlanById(id);
+
+        try {
             if (meal != null) {
                 System.out.println(meal.toString());
-                if(InputHelper.getStringInput("Would you like to generate a shopping list for this meal plan? Y/N").equalsIgnoreCase("y")){
+                if (InputHelper.getStringInput("Would you like to generate a shopping list for this meal plan? Y/N").equalsIgnoreCase("y")) {
                     getShoppingList(meal.getMealPlanId());
                 }
             } else {
-                System.out.println("Meal plan with this ID does not exist");
+                throw new NoSuchElementException("Meal plan with this ID does not exist");
             }
+        }catch(Exception e){
+            System.err.println(e.getMessage());
         }
+    }
 
-        //Retrieve list of meal plans for saving to file
-        public List<MealPlan> getMealPlans() {
-            return mealPlanRepository.getMealPlans();
-        }
+    //Retrieve list of meal plans for saving to file
+    public List<MealPlan> getMealPlans() {
+        return mealPlanRepository.getMealPlans();
+    }
 
-        //Delete meal plan by ID
-        public void deleteMealPlanById() {
-            int id = InputHelper.getIntegerInput("Enter the ID of the meal plan to delete");
-            MealPlan mealPlan = mealPlanRepository.getMealPlanById(id);
+    //Delete meal plan by ID
+    public void deleteMealPlanById(int id) {
+        MealPlan mealPlan = mealPlanRepository.getMealPlanById(id);
 
+        try {
             if (mealPlan == null) {
-                System.out.println("Meal plan with this ID could not be found");
+                throw new NoSuchElementException("Meal plan with this ID cannot be found.");
             } else {
                 System.out.println("Delete this meal plan? Y/N");
                 String input = InputHelper.getStringInput();
 
                 if (input.equalsIgnoreCase("Y")) {
-                    try {
-                        mealPlanRepository.deleteMealPlan(mealPlan);
-                    }catch(Exception e){
-                        System.err.println(e.getMessage());
-                    }
-                } else if (input.equalsIgnoreCase("n")) {
-                    System.out.println("Meal plan not deleted");
-                } else {
-                    System.out.println("Incorrect input. Please try again");
+                    mealPlanRepository.deleteMealPlan(mealPlan);
+                }else if (input.equalsIgnoreCase("n")) {
+                    throw new Exception("User cancelled: meal plan not deleted.");
+                }else {
+                    throw new IllegalArgumentException("Input must be 'y' or 'n'. Meal plan not deleted");
                 }
             }
+        }catch (Exception e) {
+            System.err.println(e.getMessage());
         }
+    }
 
-        public void getShoppingList(int id) {
-            MealPlan mealPlan = mealPlanRepository.getMealPlanById(id);
+    public void getShoppingList(int id) {
+        MealPlan mealPlan = mealPlanRepository.getMealPlanById(id);
 
+        try {
             if (mealPlan == null) {
-                System.out.println("Meal plan with this ID cannot be found!");
+                throw new NoSuchElementException("Meal plan with this ID cannot be found");
             } else {
                 StringBuilder str = new StringBuilder();
                 str.append(OutputHelper.createTitle("Shopping List")).append("\r\n");
@@ -127,5 +133,8 @@ public class MealPlanService {
                 }
                 System.out.println(str.toString());
             }
+        }catch(Exception e){
+            System.err.println(e.getMessage());
         }
     }
+}

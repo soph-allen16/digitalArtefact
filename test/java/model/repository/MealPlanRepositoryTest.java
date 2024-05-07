@@ -49,4 +49,10 @@ public class MealPlanRepositoryTest {
         assertNotNull(mealPlanRepository.getMealPlanById(0));;
         assertNull(mealPlanRepository.getMealPlanById(9999));
     }
+
+    @DisplayName("Test generate shopping list not null")
+    @Test
+    public void testGenerateShoppingList(){
+        assertNotNull(mealPlanRepository.generateShoppingList(mealPlanRepository.getMealPlanById(0)));
+    }
 }

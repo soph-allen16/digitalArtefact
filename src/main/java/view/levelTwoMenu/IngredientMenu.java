@@ -1,6 +1,7 @@
 package view.levelTwoMenu;
 
 import model.service.IngredientService;
+import utils.InputHelper;
 import view.Menu;
 
 public class IngredientMenu extends Menu {
@@ -32,7 +33,7 @@ public class IngredientMenu extends Menu {
                 ingredientService.addIngredient();
             }else if(choice == 4) {
                 //Delete ingredient
-                ingredientService.deleteIngredient();
+                ingredientService.deleteIngredient(InputHelper.getIntegerInput("Enter the ID of the ingredient you would like to delete"));
             }
             super.runMenu();
         }

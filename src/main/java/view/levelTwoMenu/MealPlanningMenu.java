@@ -16,6 +16,7 @@ public class MealPlanningMenu extends Menu {
                 "Add new meal plan",
                 "View list of meal plans",
                 "View meal plan details",
+                "Delete meal plan",
                 "Generate shopping list"
         };
     }
@@ -27,15 +28,20 @@ public class MealPlanningMenu extends Menu {
             if(choice == 1){
                 //Add new meal plan
                 mealPlanService.addNewMealPlan();
+                System.out.println("Meal plan successfully added.");
             }else if(choice == 2){
                 //View list of meal plans
                 mealPlanService.viewMealPlanList();
             }else if(choice == 3){
                 //View specific meal plan
-                mealPlanService.viewMealPlan();
+                mealPlanService.viewMealPlan(InputHelper.getPositiveIntegerInput("Enter the ID of the meal plan you would like to view"));
             }else if(choice==4){
+                //delete meal plan
+                mealPlanService.deleteMealPlanById(InputHelper.getIntegerInput("Enter the ID of a meal plan"));
+            }else if(choice==5){
                 //generate shopping list
                 mealPlanService.getShoppingList(InputHelper.getIntegerInput("Enter the ID of a meal plan"));
+
             }
             super.runMenu();
         }

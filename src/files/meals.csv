@@ -1,3 +1,6 @@
-1,Basic Curry,Garlic:3;Onion:1;Coriander:1;Turmeric:1;Lentils:200;Spinach:100;Cumin:1;Chilli:1;Tinned Tomatoes:1;
-0,Chilli,Garlic:2;Onion:1;Paprika:1;Chilli Powder:1;Sweetcorn:1;Sweet Peppers:1;Cumin:2;Tinned Tomatoes:1;
-2,Mediterranean Veg,Tomatoes:100;Olive Oil:2;Courgette:1;Red Onion:1;Harissa Spice:2;Peppers:2;
+1,Basic Curry,Spinach:100;Onion:1;Cumin:1;Coriander:1;Chilli:1;Turmeric:1;Lentils:200;Tinned Tomatoes:1;Garlic:3;
+0,Chilli,Onion:1;Sweet Peppers:1;Cumin:2;Sweetcorn:1;Chilli Powder:1;Paprika:1;Tinned Tomatoes:1;Garlic:2;
+2,Mediterranean Veg,Olive Oil:2;Red Onion:1;Courgette:1;Peppers:2;Tomatoes:100;Harissa Spice:2;
+3,Salad,Tomato:100;Salad Dressing:2;Lettuce:1;Cucumber:1;Peppers:2;
+4,Frittata,Cheese:100;Spinach:100;Red Onion:1;Peppers:1;Egg:6;
+5,Burgers,Potatoes:200;Bap:2;Burger:2;

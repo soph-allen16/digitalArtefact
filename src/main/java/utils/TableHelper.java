@@ -17,10 +17,8 @@ public class TableHelper {
     //Prints a 2 column table with smaller ID column 1
     public static void printTwoColumnTable(String[][] table, String[] headers) {
         if(headers.length != 2){
-            System.out.println("Number of columns must be two!");
-            return;
+            throw new IllegalArgumentException("Number of headers must be 2");
         }
-
         //Remove any trailing spaces from headers
         String[] headerArray = Arrays.stream(headers).map(String::trim).toArray(String[]::new);
 
@@ -32,8 +30,10 @@ public class TableHelper {
         //Prints a long divider for the headers
         System.out.println(OutputHelper.createCharString('_', tableWidth+3));
         //Prints each row in the table
-        for (String[] row : table) {
-            System.out.format(format, row);
+        if(table!=null) {
+            for (String[] row : table) {
+                System.out.format(format, row);
+            }
         }
     }
 

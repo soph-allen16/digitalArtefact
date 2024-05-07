@@ -21,7 +21,7 @@ public class InputHelper {
         try {
             input = scanner.nextInt();
         }catch (Exception ignored){
-            System.out.println("Incorrect input. Please enter an integer.");
+            System.err.println("Incorrect input. Please enter an integer.");
         }
         scanner.nextLine();
         return input;
@@ -65,7 +65,7 @@ public class InputHelper {
         String input = scanner.nextLine();
         if(input.isBlank()) {
             System.out.println("Input cannot be blank. Please try again.");
-            getStringInput();
+            return getStringInput();
         }
         return input;
     }

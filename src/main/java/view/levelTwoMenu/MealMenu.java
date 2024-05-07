@@ -38,7 +38,7 @@ public class MealMenu extends Menu {
                 mealService.addMeal();
             }else if ( choice == 4) {
                 //Delete meal
-                mealService.deleteMealById();
+                mealService.deleteMealById(InputHelper.getIntegerInput("Enter the ID of the meal you would like to delete"));
             }
             super.runMenu();
         }
